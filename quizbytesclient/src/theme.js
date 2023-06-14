@@ -143,6 +143,20 @@ export const themeSettings = (mode) => {
               xxl: 3800,
             },
           },
+          components: {
+            MuiToolbar: {
+                styleOverrides: {
+                    regular: {
+                        minHeight: 56,
+                        maxHeight: 56,
+                        '@media (min-width: 464px)': {
+                          minHeight: 56,
+                          maxHeight: 56,
+                        }
+                    }
+                }
+            }
+        },
     };
 };
 

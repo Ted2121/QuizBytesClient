@@ -18,6 +18,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Logo from '../assets/Logo2.png'
 
 const drawerWidth = 240;
+const appBarHeight = 60;
 const navItems = ['Quiz'];
 const drawerItems = ['Home', 'Quiz', 'Sign out'];
 
@@ -31,25 +32,25 @@ function Navbar(props) {
 
   const logo = (
     <picture style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-  <img
-    src={Logo}
-    alt="quizbytes"
-    style={{ height: '100%', objectFit: 'contain', maxWidth: '130px' }}
-  />
-</picture>
+      <img
+        src={Logo}
+        alt="quizbytes"
+        style={{ height: '100%', objectFit: 'contain', maxWidth: '130px' }}
+      />
+    </picture>
   );
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', }}>
-      <Box sx={{mt:'10px'}}>
-      {logo}
+      <Box sx={{ mt: '10px' }}>
+        {logo}
       </Box>
-      <Divider sx={{backgroundColor:'white.main'}}/>
+      <Divider sx={{ backgroundColor: 'white.main' }} />
       <List>
         {drawerItems.map((item) => (
-          <ListItem key={item} disablePadding sx={{mt:'8px'}}>
-            <ListItemButton sx={{ textAlign:'center' }}>
-              <ListItemText primaryTypographyProps={{variant:'h4', fontWeight:500}} primary={item} sx={{color:'white.text'}}/>
+          <ListItem key={item} disablePadding sx={{ mt: '8px' }}>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+              <ListItemText primaryTypographyProps={{ variant: 'h4', fontWeight: 500 }} primary={item} sx={{ color: 'white.text' }} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -60,10 +61,13 @@ function Navbar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <AppBar component="nav" sx={{ backgroundColor: "grey.dark" }}>
-        <Toolbar sx={{ display: 'flex', justifyContent: "space-between" }}>
-          <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex'}}>
+      <AppBar component="nav" sx={{ backgroundColor: "grey.dark"}}>
+        <Toolbar 
+        sx={{ display: 'flex', justifyContent: "space-between"}}
+        variant='regular'
+        >
+          <Box sx={{ display: 'flex'}}>
             <IconButton
               aria-label="open drawer"
               edge="start"
@@ -108,28 +112,26 @@ function Navbar(props) {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Box component="nav" >
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-          PaperProps={{
-            sx: {
-              backgroundColor: 'grey.dark',
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </Box>
+      <Drawer
+        container={container}
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        sx={{
+          display: { xs: 'block', sm: 'none' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+        }}
+        PaperProps={{
+          sx: {
+            backgroundColor: 'grey.dark',
+          },
+        }}
+      >
+        {drawer}
+      </Drawer>
     </Box>
   );
 }
