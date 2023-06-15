@@ -130,8 +130,17 @@ function Navbar(props) {
               ))}
             </Box>
           </Box>
+          
           <Box>
-            <Link to='signup' style={{ textDecoration: 'none' }}>
+          <Link to='demo' style={{ textDecoration: 'none' }}>
+              <Button
+                variant='contained'
+                sx={{fontWeight:600}}
+              >
+                Try Demo
+              </Button>
+            </Link>
+            <Link to='signup' style={{ textDecoration: 'none', marginLeft:'25px' }}>
               <Button
                 variant='outlined'
                 color='white'
