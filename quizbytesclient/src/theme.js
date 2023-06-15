@@ -36,7 +36,7 @@ export const designTokens = () => ({
         800: "#624d47",
         900: "#312724"
     },
-    
+
     white: {
         100: "#ffffff",
         200: "#fcfcfc"
@@ -144,28 +144,52 @@ export const themeSettings = (mode) => {
         },
         breakpoints: {
             values: {
-              xs: 0,
-              sm: 464,
-              md: 900,
-              lg: 1200,
-              xl: 1536,
-              xxl: 3800,
+                xs: 0,
+                sm: 464,
+                md: 900,
+                lg: 1200,
+                xl: 1536,
+                xxl: 3800,
             },
-          },
-          components: {
+        },
+        components: {
             MuiToolbar: {
                 styleOverrides: {
                     regular: {
                         minHeight: 56,
                         maxHeight: 56,
                         '@media (min-width: 464px)': {
-                          minHeight: 56,
-                          maxHeight: 56,
+                            minHeight: 56,
+                            maxHeight: 56,
                         }
                     }
                 }
-            }
+            },
+            MuiCssBaseline: {
+                styleOverrides: {
+                    '*': {
+                        '&::-webkit-scrollbar': {
+                            width: '0.8em',
+                        },
+                        '&::-webkit-scrollbar-track': {
+                            backgroundColor: colors.grey[700],
+                            boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                            backgroundColor: colors.grey[100],
+                            borderRadius: '4px',
+                        },
+                    },
+                },
+            },
+            MuiBox: {
+              styleOverrides: {
+                overflow: 'auto',
+                
+              },
+            },
         },
+
     };
 };
 

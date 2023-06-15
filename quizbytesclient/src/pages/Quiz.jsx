@@ -1,7 +1,6 @@
 import React from 'react'
 import QuizSelector from '../layouts/QuizSelector'
 import Box from '@mui/material/Box'
-import DecorativeCircle from '../components/DecorativeCircle'
 
 function Quiz() {
     return (
@@ -15,8 +14,6 @@ function Quiz() {
             }}
         >
             <QuizSelector />
-            
-
         </Box>
     )
 }

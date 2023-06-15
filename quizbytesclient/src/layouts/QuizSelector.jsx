@@ -12,33 +12,33 @@ function QuizSelector() {
 
     const handleChange = (value) => {
         const filteredCourses = courses.filter((course) => {
-          const courseMatches = course.course.toLowerCase().includes(value.toLowerCase());
-          const chapterMatches = course.chapters.some((chapter) =>
-            chapter.toLowerCase().includes(value.toLowerCase())
-          );
-    
-          return courseMatches || chapterMatches;
+            const courseMatches = course.course.toLowerCase().includes(value.toLowerCase());
+            const chapterMatches = course.chapters.some((chapter) =>
+                chapter.toLowerCase().includes(value.toLowerCase())
+            );
+
+            return courseMatches || chapterMatches;
         });
-    
+
         setFilteredData(filteredCourses);
         // console.log(filteredCourses);
-      };
+    };
 
-      return (
+    return (
         <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', height: '100%' }}>
-          <Card sx={{ height: '100%', backgroundColor: 'primary.main' }}>
-            <CardContent>
-              <SearchBar
-                placeholder="Search for a course or chapter"
-                onChange={(event) => handleChange(event.target.value)}
-              />
-               <Box sx={{ overflow: 'auto', maxHeight: '53vh' }} className="test">
-          <Courses data={filteredData} />
+            <Card sx={{ height: '100%', backgroundColor: 'primary.main' }}>
+                <CardContent>
+                    <SearchBar
+                        placeholder="Search for a course or chapter"
+                        onChange={(event) => handleChange(event.target.value)}
+                    />
+                    <Box sx={{ overflow: 'auto', maxHeight: '53vh' }}>
+                        <Courses data={filteredData} />
+                    </Box>
+                </CardContent>
+            </Card>
         </Box>
-            </CardContent>
-          </Card>
-        </Box>
-      );
+    );
 }
 
 export default QuizSelector;

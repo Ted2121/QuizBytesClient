@@ -10,7 +10,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function CourseAccordion({ id, course, chapters }) {
   return (
-    <Accordion>
+    <Accordion square={true}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls={`${course}-content`}

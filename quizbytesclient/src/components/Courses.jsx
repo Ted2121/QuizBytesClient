@@ -4,7 +4,7 @@ import CourseAccordion from './CourseAccordion';
 
 function Courses({data}) {
     return (
-        <Box sx={{mt:'5px'}}>
+        <Box>
             {data.map((item) => (
                 <CourseAccordion
                     key={item.id}
