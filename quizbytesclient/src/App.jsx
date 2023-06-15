@@ -1,10 +1,19 @@
 import { useState } from 'react'
+import './styles/styles.css';
 import { ColorModeContext, useMode } from './theme';
-import { Box, Button, CssBaseline, Grid, ThemeProvider } from '@mui/material';
+import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import Navbar from './layouts/Navbar';
-import Quiz from './pages/Quiz';
+import QuizSelection from './pages/QuizSelection';
 import DecorativeCircle from './components/DecorativeCircle';
-// import './App.css'
+import { Route, Routes } from 'react-router-dom';
+import RouteLayout from './components/RouteLayout';
+import RequireAuth from './components/RequireAuth';
+import Home from './pages/Home';
+import Demo from './pages/Demo';
+import Roadmap from './pages/Roadmap';
+import Quiz from './pages/Quiz';
+import SignUp from './pages/Signup';
+import LogIn from './pages/Login';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -28,7 +37,23 @@ function App() {
               minWidth: '100%',
               justifyContent: 'center'
             }}>
-            <Quiz />
+            <Routes>
+              <Route path="/" element={<RouteLayout />}>
+                {/* public routes */}
+                <Route path='/' element={<Home />} />
+                <Route path='demo' element={<Demo />} />
+                <Route path='select' element={<QuizSelection />} />
+                <Route path='roadmap' element={<Roadmap />} />
+                <Route path='login' element={<LogIn />} />
+                <Route path='signup' element={<SignUp />} />
+
+                {/* private routes */}
+                <Route element={<RequireAuth />}>
+                  <Route path='/quiz' element={<Quiz />} />
+                </Route>
+              </Route>
+            </Routes>
+
           </Box>
           <DecorativeCircle
             color={circleColor}

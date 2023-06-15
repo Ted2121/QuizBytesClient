@@ -6,7 +6,7 @@ import { Card, CardContent } from '@mui/material';
 import courses from '../data/courses';
 
 
-function QuizSelector() {
+function QuizSelectionMenu() {
     const data = courses;
     const [filteredData, setFilteredData] = useState(data);
 
@@ -41,4 +41,4 @@ function QuizSelector() {
     );
 }
 
-export default QuizSelector;
+export default QuizSelectionMenu;

@@ -176,18 +176,12 @@ export const themeSettings = (mode) => {
                             boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
                         },
                         '&::-webkit-scrollbar-thumb': {
-                            backgroundColor: colors.grey[100],
+                            backgroundColor: colors.grey[200],
                             borderRadius: '4px',
                         },
                     },
                 },
-            },
-            MuiBox: {
-              styleOverrides: {
-                overflow: 'auto',
-                
-              },
-            },
+            }
         },
 
     };
