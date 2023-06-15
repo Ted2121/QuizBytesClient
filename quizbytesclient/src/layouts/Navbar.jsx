@@ -13,10 +13,32 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Logo from '../assets/Logo.png'
+import { Link } from 'react-router-dom'
 
 const drawerWidth = 240;
-const navItems = ['Quiz'];
-const drawerItems = ['Home', 'Quiz', 'Sign out'];
+const navItems = [{
+  id: '0',
+  text: 'Quiz',
+  route: 'select'
+}];
+
+const drawerItems = [
+  {
+    id: '0',
+    text: 'Home',
+    route: '/'
+  },
+  {
+    id: '1',
+    text: 'Quiz',
+    route: '/'
+  },
+  {
+    id: '2',
+    text: 'Sign out',
+    route: '/'
+  },
+];
 
 function Navbar(props) {
   const { window } = props;
@@ -27,26 +49,33 @@ function Navbar(props) {
   };
 
   const logo = (
-    <picture style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <img
-        src={Logo}
-        alt="quizbytes"
-        style={{ height: '100%', objectFit: 'contain', maxWidth: '130px' }}
-      />
-    </picture>
+    <Link to='/' style={{ textDecoration: 'none' }}>
+      <picture style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <img
+          src={Logo}
+          alt="quizbytes"
+          style={{ height: '100%', objectFit: 'contain', maxWidth: '130px' }}
+        />
+      </picture>
+    </Link>
   );
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', }}>
+
       <Box sx={{ mt: '10px' }}>
         {logo}
       </Box>
+
       <Divider sx={{ backgroundColor: 'white.main' }} />
       <List>
         {drawerItems.map((item) => (
-          <ListItem key={item} disablePadding sx={{ mt: '8px' }}>
+          <ListItem key={item.id} disablePadding sx={{ mt: '8px' }}>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primaryTypographyProps={{ variant: 'h4', fontWeight: 500 }} primary={item} sx={{ color: 'white.text' }} />
+              <ListItemText
+                primaryTypographyProps={{ variant: 'h4', fontWeight: 500 }}
+                primary={item.text}
+                sx={{ color: 'white.text' }} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -57,13 +86,13 @@ function Navbar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex'}}>
-      <AppBar component="nav" sx={{ backgroundColor: "grey.dark"}}>
-        <Toolbar 
-        sx={{ display: 'flex', justifyContent: "space-between"}}
-        variant='regular'
+    <Box sx={{ display: 'flex' }}>
+      <AppBar component="nav" sx={{ backgroundColor: "grey.dark" }}>
+        <Toolbar
+          sx={{ display: 'flex', justifyContent: "space-between" }}
+          variant='regular'
         >
-          <Box sx={{ display: 'flex'}}>
+          <Box sx={{ display: 'flex' }}>
             <IconButton
               aria-label="open drawer"
               edge="start"
@@ -80,32 +109,47 @@ function Navbar(props) {
 
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {navItems.map((item) => (
-                <Button
-                  variant="text"
-                  key={item}
-                  sx={{
-                    color: "white.text",
-                    fontSize: "large",
-                    size: "large",
-                    mt: "5px",
-                    ml: "30px",
-                    '&:hover': {
-                      color: 'primary.main',
-                      backgroundColor: 'grey.dark'
-                    },
-                  }}>
-                  {item}
-                </Button>
+                <Link key={item.id} to={item.route} style={{ textDecoration: 'none' }}>
+                  <Button
+                    variant="text"
+                    key={item.id}
+                    sx={{
+                      color: "white.text",
+                      fontSize: "large",
+                      size: "large",
+                      mt: "5px",
+                      ml: "30px",
+                      '&:hover': {
+                        color: 'primary.main',
+                        backgroundColor: 'grey.dark'
+                      },
+                    }}>
+                    {item.text}
+                  </Button>
+                </Link>
               ))}
             </Box>
           </Box>
-          <IconButton
-            color="white"
-            aria-label="sign in"
-            onClick={handleDrawerToggle}
-          >
-            <AccountCircleIcon fontSize="large" />
-          </IconButton>
+          <Box>
+            <Link to='signup' style={{ textDecoration: 'none' }}>
+              <Button
+                variant='outlined'
+                color='white'
+              >
+                Sign Up
+              </Button>
+            </Link>
+            <Link to='login' style={{ textDecoration: 'none' }}>
+              <IconButton
+                color="white"
+                aria-label="log in"
+                onClick={handleDrawerToggle}
+                sx={{ ml: '25px' }}
+              >
+                <AccountCircleIcon fontSize="large" />
+              </IconButton>
+            </Link>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer
