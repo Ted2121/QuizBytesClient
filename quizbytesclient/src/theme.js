@@ -40,6 +40,9 @@ export const designTokens = () => ({
     white: {
         100: "#ffffff",
         200: "#fcfcfc"
+    },
+    black: {
+        100: "#000000"
     }
 
 });
@@ -78,6 +81,9 @@ export const themeSettings = (mode) => {
                     white: {
                         main: colors.white[100],
                         text: colors.white[200]
+                    },
+                    black: {
+                        main: colors.black[100]
                     }
                 }
                 : {
@@ -108,6 +114,9 @@ export const themeSettings = (mode) => {
                     white: {
                         main: colors.white[100],
                         text: colors.white[200]
+                    },
+                    black: {
+                        main: colors.black[100]
                     }
                 }),
         },
