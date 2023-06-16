@@ -7,8 +7,7 @@ function QuizSelection() {
         <Box
             sx={{
                 position: 'relative',
-                // minWidth: '100%',
-                maxWidth: '90vw',
+                maxWidth: '85vw',
                 top: '15vh',
                 height:'60vh',
                 maxHeight: '60vh'

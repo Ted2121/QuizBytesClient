@@ -1,8 +1,11 @@
 import React from 'react'
+import BuiltQuiz from '../layouts/BuiltQuiz';
 
 function Quiz() {
   return (
-    <div>Quiz</div>
+    <>
+      <BuiltQuiz />
+    </>
   )
 }
 

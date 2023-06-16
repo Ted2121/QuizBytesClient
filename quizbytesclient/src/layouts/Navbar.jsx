@@ -15,7 +15,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Logo from '../assets/Logo.png'
 import { Link, Navigate } from 'react-router-dom'
 import { useNavigate, useLocation } from 'react-router-dom';
-import useAuth from "../Hooks/useAuth";
+import useAuth from '../hooks/useAuth';
 import DrawerButton from '../components/DrawerButton';
 
 const drawerWidth = 240;
@@ -49,7 +49,7 @@ function Navbar(props) {
   const { auth, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || '/';
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -65,7 +65,7 @@ function Navbar(props) {
       <picture style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <img
           src={Logo}
-          alt="quizbytes"
+          alt='quizbytes'
           style={{ height: '100%', objectFit: 'contain', maxWidth: '130px' }}
         />
       </picture>
@@ -73,12 +73,12 @@ function Navbar(props) {
   );
 
   const signOutDrawerButton = (
-    <DrawerButton key='signout' text='Sign out' onClick={handleSignOut} />
+    <DrawerButton id='signout' text='Sign out' onClick={handleSignOut} />
   );
 
   const signUpDrawerButton = (
     <Link to='signup' style={{ textDecoration: 'none' }}>
-      <DrawerButton key='signup' text='Sign up'/>
+      <DrawerButton id='signup' text='Sign up'/>
     </Link>
   );
 
@@ -131,19 +131,19 @@ function Navbar(props) {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar component="nav" sx={{ backgroundColor: "grey.dark" }}>
+      <AppBar component='nav' sx={{ backgroundColor: 'grey.dark' }}>
         <Toolbar
-          sx={{ display: 'flex', justifyContent: "space-between" }}
+          sx={{ display: 'flex', justifyContent: 'space-between' }}
           variant='regular'>
           <Box sx={{ display: 'flex' }}>
             <IconButton
-              aria-label="open drawer"
-              edge="start"
+              aria-label='open drawer'
+              edge='start'
               onClick={handleDrawerToggle}
               sx={{ mr: 2, display: { sm: 'none' }, }}>
               <MenuIcon
                 fontSize='large'
-                sx={{ color: "white.main" }} />
+                sx={{ color: 'white.main' }} />
             </IconButton>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {logo}
@@ -152,14 +152,14 @@ function Navbar(props) {
               {navItems.map((item) => (
                 <Link key={item.id} to={item.route} style={{ textDecoration: 'none' }}>
                   <Button
-                    variant="text"
+                    variant='text'
                     key={item.id}
                     sx={{
-                      color: "white.text",
-                      fontSize: "large",
-                      size: "large",
-                      mt: "5px",
-                      ml: "30px",
+                      color: 'white.text',
+                      fontSize: 'large',
+                      size: 'large',
+                      mt: '5px',
+                      ml: '30px',
                       '&:hover': {
                         color: 'primary.main',
                         backgroundColor: 'grey.dark'
@@ -184,9 +184,9 @@ function Navbar(props) {
             </Box>
             <Link to='login' style={{ textDecoration: 'none', marginLeft: '25px' }}>
               <IconButton
-                color="white"
-                aria-label="log in">
-                <AccountCircleIcon fontSize="large" />
+                color='white'
+                aria-label='log in'>
+                <AccountCircleIcon fontSize='large' />
               </IconButton>
             </Link>
           </Box>
@@ -194,7 +194,7 @@ function Navbar(props) {
       </AppBar>
       <Drawer
         container={container}
-        variant="temporary"
+        variant='temporary'
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{

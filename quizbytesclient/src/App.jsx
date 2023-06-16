@@ -18,7 +18,7 @@ import LogIn from './pages/Login';
 function App() {
   const [theme, colorMode] = useMode();
   const navbarHeight = '56px';
-  const circleColor = "#f4c1b2";
+  const circleColor = '#f4c1b2';
 
 
   return (
@@ -38,10 +38,10 @@ function App() {
               justifyContent: 'center'
             }}>
             <Routes>
-              <Route path="/" element={<RouteLayout />}>
+              <Route path='/' element={<RouteLayout />}>
                 {/* public routes */}
-                <Route path='/' element={<Home />} />
-                <Route path='demo' element={<Demo />} />
+                <Route path='/todo' element={<Home />} />
+                <Route path='/' element={<Demo />} />
                 <Route path='select' element={<QuizSelection />} />
                 <Route path='roadmap' element={<Roadmap />} />
                 <Route path='login' element={<LogIn />} />

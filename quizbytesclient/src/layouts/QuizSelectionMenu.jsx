@@ -29,7 +29,7 @@ function QuizSelectionMenu() {
             <Card sx={{ height: '100%', backgroundColor: 'primary.main' }}>
                 <CardContent>
                     <SearchBar
-                        placeholder="Search for a course or chapter"
+                        placeholder='Search for a course or chapter'
                         onChange={(event) => handleChange(event.target.value)}
                     />
                     <Box sx={{ overflow: 'auto', maxHeight: '53vh' }}>

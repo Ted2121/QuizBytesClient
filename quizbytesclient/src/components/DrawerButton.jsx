@@ -1,9 +1,9 @@
 import { ListItem, ListItemButton, ListItemText } from '@mui/material';
 import React from 'react'
 
-function DrawerButton({key, text, onClick = () => {}}) {
+function DrawerButton({id, text, onClick = () => {}}) {
   return (
-    <ListItem key={key} disablePadding sx={{ mt: '8px' }}>
+    <ListItem key={id} disablePadding sx={{ mt: '8px' }}>
     <ListItemButton
       sx={{ textAlign: 'center' }}
       onClick={onClick}
