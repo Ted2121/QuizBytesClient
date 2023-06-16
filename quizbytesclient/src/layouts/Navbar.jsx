@@ -13,7 +13,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Logo from '../assets/Logo.png'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom';
+import useAuth from "../Hooks/useAuth";
+import DrawerButton from '../components/DrawerButton';
 
 const drawerWidth = 240;
 const navItems = [{
@@ -31,22 +34,31 @@ const drawerItems = [
   {
     id: '1',
     text: 'Quiz',
-    route: '/'
+    route: 'select'
   },
   {
     id: '2',
-    text: 'Sign out',
-    route: '/'
+    text: 'Demo',
+    route: 'demo'
   },
 ];
 
 function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { auth, signOut } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  const handleSignOut = () => {
+    signOut();
+    navigate(from, { replace: true });
+  }
 
   const logo = (
     <Link to='/' style={{ textDecoration: 'none' }}>
@@ -60,6 +72,35 @@ function Navbar(props) {
     </Link>
   );
 
+  const signOutDrawerButton = (
+    <DrawerButton key='signout' text='Sign out' onClick={handleSignOut} />
+  );
+
+  const signUpDrawerButton = (
+    <Link to='signup' style={{ textDecoration: 'none' }}>
+      <DrawerButton key='signup' text='Sign up'/>
+    </Link>
+  );
+
+  const signUpButton = (
+    <Link to='signup' style={{ textDecoration: 'none', marginLeft: '25px' }}>
+      <Button
+        variant='outlined'
+        color='white'>
+        Sign Up
+      </Button>
+    </Link>
+  );
+
+  const signOutButton = (
+    <Button
+      variant='outlined'
+      color='white'
+      onClick={handleSignOut}>
+      Sign Out
+    </Button>
+  );
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', }}>
 
@@ -70,15 +111,18 @@ function Navbar(props) {
       <Divider sx={{ backgroundColor: 'white.main' }} />
       <List>
         {drawerItems.map((item) => (
-          <ListItem key={item.id} disablePadding sx={{ mt: '8px' }}>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText
-                primaryTypographyProps={{ variant: 'h4', fontWeight: 500 }}
-                primary={item.text}
-                sx={{ color: 'white.text' }} />
-            </ListItemButton>
-          </ListItem>
+          <Link key={item.id} to={item.route} style={{ textDecoration: 'none' }}>
+            <ListItem disablePadding sx={{ mt: '8px' }}>
+              <ListItemButton sx={{ textAlign: 'center' }}>
+                <ListItemText
+                  primaryTypographyProps={{ variant: 'h4', fontWeight: 500 }}
+                  primary={item.text}
+                  sx={{ color: 'white.text' }} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
+        {auth?.token ? signOutDrawerButton : signUpDrawerButton}
       </List>
     </Box>
   );
@@ -90,15 +134,13 @@ function Navbar(props) {
       <AppBar component="nav" sx={{ backgroundColor: "grey.dark" }}>
         <Toolbar
           sx={{ display: 'flex', justifyContent: "space-between" }}
-          variant='regular'
-        >
+          variant='regular'>
           <Box sx={{ display: 'flex' }}>
             <IconButton
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' }, }}
-            >
+              sx={{ mr: 2, display: { sm: 'none' }, }}>
               <MenuIcon
                 fontSize='large'
                 sx={{ color: "white.main" }} />
@@ -106,7 +148,6 @@ function Navbar(props) {
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {logo}
             </Box>
-
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {navItems.map((item) => (
                 <Link key={item.id} to={item.route} style={{ textDecoration: 'none' }}>
@@ -130,31 +171,21 @@ function Navbar(props) {
               ))}
             </Box>
           </Box>
-          
-          <Box>
-          <Link to='demo' style={{ textDecoration: 'none' }}>
-              <Button
-                variant='contained'
-                sx={{fontWeight:600}}
-              >
-                Try Demo
-              </Button>
-            </Link>
-            <Link to='signup' style={{ textDecoration: 'none', marginLeft:'25px' }}>
-              <Button
-                variant='outlined'
-                color='white'
-              >
-                Sign Up
-              </Button>
-            </Link>
-            <Link to='login' style={{ textDecoration: 'none' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <Link to='demo' style={{ textDecoration: 'none' }}>
+                <Button
+                  variant='contained'
+                  sx={{ fontWeight: 600 }}>
+                  Try Demo
+                </Button>
+              </Link>
+              {auth?.token ? signOutButton : signUpButton}
+            </Box>
+            <Link to='login' style={{ textDecoration: 'none', marginLeft: '25px' }}>
               <IconButton
                 color="white"
-                aria-label="log in"
-                onClick={handleDrawerToggle}
-                sx={{ ml: '25px' }}
-              >
+                aria-label="log in">
                 <AccountCircleIcon fontSize="large" />
               </IconButton>
             </Link>
