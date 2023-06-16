@@ -1,13 +1,7 @@
 import { Box, Checkbox, FormControlLabel } from '@mui/material'
 import {React, useState} from 'react'
 
-function Answer({ label }) {
-    const [isChecked, setIsChecked] = useState(false);
-  
-    const handleCheckboxChange = (event) => {
-      setIsChecked(event.target.checked);
-    };
-  
+function Answer({ id, label, isChecked, onCheckboxChange }) {
     return (
       <Box
         sx={{
@@ -21,7 +15,7 @@ function Answer({ label }) {
         }}
       >
         <FormControlLabel
-          control={<Checkbox checked={isChecked} onChange={handleCheckboxChange} />}
+          control={<Checkbox id={id} checked={isChecked} onChange={onCheckboxChange} />}
           label={label}
         />
       </Box>

@@ -9,12 +9,14 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import Answer from '../components/Answer';
 import { FormGroup } from '@mui/material';
+import AnswerGroup from './AnswerGroup';
 
 function BuiltQuiz({ data }) {
     const [activeStep, setActiveStep] = React.useState(0);
     const theme = useTheme();
     const steps = data.questions;
     const maxSteps = steps.length;
+    const currentQuestion = steps[activeStep];
 
 
     const handleNext = () => {
@@ -32,12 +34,8 @@ function BuiltQuiz({ data }) {
             alignItems: 'center',
             justifyContent: 'center'
         }}>
-            {steps[activeStep].possibleAnswers ? (
-                steps[activeStep].possibleAnswers.map((item, index) => (
-                    <FormGroup key={index} >
-                        <Answer label={item} />
-                    </FormGroup>
-                ))
+            {currentQuestion ? (
+                <AnswerGroup question={currentQuestion} />
             ) : (
                 <p>No possible answers available.</p>
             )}
@@ -77,7 +75,9 @@ function BuiltQuiz({ data }) {
                     maxWidth: '100%',
                     p: 2,
                     maxHeight: '40vh',
-                    overflow: 'auto'
+                    overflow: 'auto',
+                    borderTop: '1px solid black',
+                    borderBottom: '1px solid black',
                 }}>
                 {answers}
             </Box>
