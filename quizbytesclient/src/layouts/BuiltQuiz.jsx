@@ -7,16 +7,21 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import Answer from '../components/Answer';
-import { FormGroup } from '@mui/material';
 import AnswerGroup from './AnswerGroup';
 
-function BuiltQuiz({ data }) {
+function BuiltQuiz({ data, onSubmit, setQuizState}) {
     const [activeStep, setActiveStep] = React.useState(0);
     const theme = useTheme();
     const steps = data.questions;
     const maxSteps = steps.length;
     const currentQuestion = steps[activeStep];
+
+    const [submittedAnswers, setSubmittedAnswers] = React.useState(
+        data.questions.map((question) => ({
+          questionId: question.id,
+          selectedOptions: []
+        }))
+      );
 
 
     const handleNext = () => {
@@ -27,6 +32,53 @@ function BuiltQuiz({ data }) {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    const handleOnSubmit = () => {
+        // TODO update quizState object's clientSubmitTime
+        // call the callback function onSubmit
+    }
+
+    const handleUpdateSelectedAnswers = () => {
+        //TODO  update quizState logic
+    }
+
+    const stepperNextButton = (
+        <Button
+            variant='outlined'
+            color='black'
+            size="medium"
+            onClick={handleNext}
+            disabled={activeStep === maxSteps - 1}
+            sx={{
+                fontSize: '1rem',
+                '&:hover': {
+                    backgroundColor: 'secondary.light'
+                },
+            }}
+        >
+            Next
+            {theme.direction === 'rtl' ? (
+                <KeyboardArrowLeft fontSize='large' />
+            ) : (
+                <KeyboardArrowRight fontSize='large' />
+            )}
+        </Button>
+    )
+
+    const submitButton = (
+        <Button color='black'
+        variant='outlined'
+        size="medium"
+        onClick={onSubmit}
+        sx={{
+            fontSize: '1rem',
+            '&:hover': {
+                backgroundColor: 'secondary.light'
+            },
+        }}>
+            Submit
+        </Button>
+    )
+
     const answers = (
         <Box sx={{
             display: 'flex',
@@ -35,7 +87,7 @@ function BuiltQuiz({ data }) {
             justifyContent: 'center'
         }}>
             {currentQuestion ? (
-                <AnswerGroup question={currentQuestion} />
+                <AnswerGroup question={currentQuestion} submittedAnswers={submittedAnswers} setSubmittedAnswers={setSubmittedAnswers}/>
             ) : (
                 <p>No possible answers available.</p>
             )}
@@ -87,26 +139,7 @@ function BuiltQuiz({ data }) {
                 position="static"
                 activeStep={activeStep}
                 nextButton={
-                    <Button
-                        variant='outlined'
-                        color='black'
-                        size="medium"
-                        onClick={handleNext}
-                        disabled={activeStep === maxSteps - 1}
-                        sx={{
-                            fontSize: '1rem',
-                            '&:hover': {
-                                backgroundColor: 'secondary.light'
-                            },
-                        }}
-                    >
-                        Next
-                        {theme.direction === 'rtl' ? (
-                            <KeyboardArrowLeft fontSize='large' />
-                        ) : (
-                            <KeyboardArrowRight fontSize='large' />
-                        )}
-                    </Button>
+                    (activeStep === maxSteps - 1) ? submitButton : stepperNextButton
                 }
                 backButton={
                     <Button
@@ -130,6 +163,7 @@ function BuiltQuiz({ data }) {
                         Back
                     </Button>
                 }
+
             />
         </Paper>
     );
