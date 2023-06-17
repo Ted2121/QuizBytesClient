@@ -6,22 +6,21 @@ import { Box } from '@mui/material';
 const data = demoQuiz;
 
 function Demo() {
-  const[quizState, setQuizState] = useState(null);
+  
 
-  const handleQuizSubmit = () => {
+  const handleQuizSubmit = (data, quizState) => {
     // TODO submit logic
     // verify correct answers
+    verifyQuizAnswers(quizState);
     // show the result screen with the corrected quiz
+    console.log(quizState);
   }
 
-  const setDifficultyLevel = () => {
-    // TODO set the difficulty level to that of the questions in data
-    // call this method in the handleQuizSubmit method before verifying the correct answers
-  }
+  
 
   return (
-    <Box sx={{display:'flex', alignItems:'center'}}>
-      <BuiltQuiz data={data} onSubmit={handleQuizSubmit} setQuizState={setQuizState}/>
+    <Box sx={{display:'flex', alignItems:'center', overflow:'auto', }}>
+      <BuiltQuiz data={data} onSubmit={handleQuizSubmit} />
 
     </Box>
   )

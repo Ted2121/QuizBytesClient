@@ -25,7 +25,7 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', overflow:'auto', height:'auto' }}>
           <Navbar />
           <Box
             className='main'
@@ -35,7 +35,9 @@ function App() {
               marginTop: navbarHeight,
               minHeight: '100%',
               minWidth: '100%',
-              justifyContent: 'center'
+              justifyContent: 'center', 
+              overflow:'auto', 
+              height:'auto' 
             }}>
             <Routes>
               <Route path='/' element={<RouteLayout />}>

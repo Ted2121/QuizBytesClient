@@ -31,7 +31,7 @@ function AnswerGroup({ question, submittedAnswers, setSubmittedAnswers }) {
   };
 
   return (
-    <FormGroup sx={{ width: '100%' }}>
+    <FormGroup sx={{ width: '100%', alignItems:'center' }}>
       {question.possibleAnswers.map((item, index) => (
         <Answer
           key={index}

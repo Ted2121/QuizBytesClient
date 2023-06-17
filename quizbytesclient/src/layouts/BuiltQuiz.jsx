@@ -9,8 +9,12 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import AnswerGroup from './AnswerGroup';
 
-function BuiltQuiz({ data, onSubmit, setQuizState}) {
+function BuiltQuiz({ data, onSubmit }) {
     const [activeStep, setActiveStep] = React.useState(0);
+    const [quizState, setQuizState] = React.useState({
+        clientSubmitTime: "",
+        submittedAnswers: []
+    });
     const theme = useTheme();
     const steps = data.questions;
     const maxSteps = steps.length;
@@ -18,10 +22,10 @@ function BuiltQuiz({ data, onSubmit, setQuizState}) {
 
     const [submittedAnswers, setSubmittedAnswers] = React.useState(
         data.questions.map((question) => ({
-          questionId: question.id,
-          selectedOptions: []
+            questionId: question.id,
+            selectedOptions: []
         }))
-      );
+    );
 
 
     const handleNext = () => {
@@ -33,13 +37,36 @@ function BuiltQuiz({ data, onSubmit, setQuizState}) {
     };
 
     const handleOnSubmit = () => {
-        // TODO update quizState object's clientSubmitTime
-        // call the callback function onSubmit
-    }
+        const updatedQuizState = {
+            ...quizState,
+            clientSubmitTime: getCurrentUtcTime(),
+            submittedAnswers: submittedAnswers,
+        };
 
-    const handleUpdateSelectedAnswers = () => {
-        //TODO  update quizState logic
-    }
+        onSubmit(updatedQuizState);
+    };
+
+    // const handleUpdateSelectedAnswers = () => {
+    //     setQuizState((prevQuizState) => ({
+    //       ...prevQuizState,
+    //       submittedAnswers: submittedAnswers
+    //     }));
+    //   };
+
+    //   const handleUpdateClientSubmitTime = () => {
+    //     const clientSubmitTime = getCurrentUtcTime();
+    //     setQuizState((prevQuizState) => ({
+    //         ...prevQuizState,
+    //         clientSubmitTime: clientSubmitTime
+    //     }));
+    //   };
+
+    const getCurrentUtcTime = () => {
+        const now = new Date();
+        const utcTime = now.toISOString();
+
+        return utcTime;
+    };
 
     const stepperNextButton = (
         <Button
@@ -66,15 +93,15 @@ function BuiltQuiz({ data, onSubmit, setQuizState}) {
 
     const submitButton = (
         <Button color='black'
-        variant='outlined'
-        size="medium"
-        onClick={onSubmit}
-        sx={{
-            fontSize: '1rem',
-            '&:hover': {
-                backgroundColor: 'secondary.light'
-            },
-        }}>
+            variant='outlined'
+            size="medium"
+            onClick={handleOnSubmit}
+            sx={{
+                fontSize: '1rem',
+                '&:hover': {
+                    backgroundColor: 'secondary.light'
+                },
+            }}>
             Submit
         </Button>
     )
@@ -87,7 +114,7 @@ function BuiltQuiz({ data, onSubmit, setQuizState}) {
             justifyContent: 'center'
         }}>
             {currentQuestion ? (
-                <AnswerGroup question={currentQuestion} submittedAnswers={submittedAnswers} setSubmittedAnswers={setSubmittedAnswers}/>
+                <AnswerGroup question={currentQuestion} submittedAnswers={submittedAnswers} setSubmittedAnswers={setSubmittedAnswers} />
             ) : (
                 <p>No possible answers available.</p>
             )}
@@ -100,7 +127,7 @@ function BuiltQuiz({ data, onSubmit, setQuizState}) {
             sx={{
                 width: { xs: '85vw', sm: '70vw', md: '55vw', lg: '45vw', xl: '38vw', xxl: '20vw' },
                 height: 'auto',
-                maxHeight: { xs: '70vh' },
+                maxHeight: { xs: '83vh' },
                 bgcolor: 'primary.main',
                 overflow: 'hidden',
             }}>
@@ -113,12 +140,10 @@ function BuiltQuiz({ data, onSubmit, setQuizState}) {
                     height: 'auto',
                     p: 2,
 
-                }}
-            >
+                }}>
                 <Typography
                     variant='h4'
-                    component='h4'
-                >
+                    component='h4'>
                     {steps[activeStep].text}</Typography>
             </Paper>
             <Box
@@ -126,7 +151,7 @@ function BuiltQuiz({ data, onSubmit, setQuizState}) {
                     height: 'auto',
                     maxWidth: '100%',
                     p: 2,
-                    maxHeight: '40vh',
+                    maxHeight: '49vh',
                     overflow: 'auto',
                     borderTop: '1px solid black',
                     borderBottom: '1px solid black',
@@ -153,8 +178,7 @@ function BuiltQuiz({ data, onSubmit, setQuizState}) {
                             '&:hover': {
                                 backgroundColor: 'secondary.light'
                             },
-                        }}
-                    >
+                        }}>
                         {theme.direction === 'rtl' ? (
                             <KeyboardArrowRight fontSize='large' />
                         ) : (
@@ -162,9 +186,7 @@ function BuiltQuiz({ data, onSubmit, setQuizState}) {
                         )}
                         Back
                     </Button>
-                }
-
-            />
+                } />
         </Paper>
     );
 }
