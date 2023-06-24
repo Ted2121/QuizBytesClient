@@ -9,10 +9,12 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import AnswerGroup from './AnswerGroup';
 
-function BuiltQuiz({ data, onSubmit }) {
+function BuiltQuiz({ data, onSubmit, startTime }) {
+
+
     const [activeStep, setActiveStep] = React.useState(0);
     const [quizState, setQuizState] = React.useState({
-        clientSubmitTime: "",
+        elapsedTime: "",
         submittedAnswers: []
     });
     const theme = useTheme();
@@ -39,34 +41,29 @@ function BuiltQuiz({ data, onSubmit }) {
     const handleOnSubmit = () => {
         const updatedQuizState = {
             ...quizState,
-            clientSubmitTime: getCurrentUtcTime(),
+            elapsedTime: getCurrentTime(),
             submittedAnswers: submittedAnswers,
         };
 
         onSubmit(updatedQuizState);
     };
 
-    // const handleUpdateSelectedAnswers = () => {
-    //     setQuizState((prevQuizState) => ({
-    //       ...prevQuizState,
-    //       submittedAnswers: submittedAnswers
-    //     }));
-    //   };
+    const getCurrentTime = () => {
+        const endTime = new Date();
 
-    //   const handleUpdateClientSubmitTime = () => {
-    //     const clientSubmitTime = getCurrentUtcTime();
-    //     setQuizState((prevQuizState) => ({
-    //         ...prevQuizState,
-    //         clientSubmitTime: clientSubmitTime
-    //     }));
-    //   };
+        const elapsedTimeInMs = endTime - startTime;
 
-    const getCurrentUtcTime = () => {
-        const now = new Date();
-        const utcTime = now.toISOString();
-
-        return utcTime;
+        return formatElapsedTime(elapsedTimeInMs);
     };
+
+    const formatElapsedTime = (elapsedTime) => {
+        const totalSeconds = Math.floor(elapsedTime / 1000);
+        const hours = Math.floor(totalSeconds / 3600).toString().padStart(2, '0');
+        const minutes = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, '0');
+        const seconds = (totalSeconds % 60).toString().padStart(2, '0');
+      
+        return `${hours}:${minutes}:${seconds}`;
+      };
 
     const stepperNextButton = (
         <Button

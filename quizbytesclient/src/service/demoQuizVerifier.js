@@ -1,19 +1,20 @@
 const verifyQuizAnswers = (data, quizState) => {
-    const verifiedAnswers = { correctAnswers: [], wrongAnswers: [] };
+  let correctCount = 0;
+  let wrongCount = 0;
   
-    data.questions.forEach((question, index) => {
-      const submittedAnswer = quizState.submittedAnswers[index].selectedOptions;
-      const correctAnswers = question.correctAnswers;
-  
-      if (arraysEqual(submittedAnswer, correctAnswers)) {
-        verifiedAnswers.correctAnswers.push(question);
-      } else {
-        verifiedAnswers.wrongAnswers.push(question);
-      }
-    });
-  
-    return verifiedAnswers;
-  };
+  data.questions.forEach((question, index) => {
+    const submittedAnswer = quizState.submittedAnswers[index].selectedOptions;
+    const correctAnswers = question.correctAnswers;
+
+    if (arraysEqual(submittedAnswer, correctAnswers)) {
+      correctCount++;
+    } else {
+      wrongCount++;
+    }
+  });
+
+  return { correctCount, wrongCount };
+};
   
   // Helper function to compare arrays for equality
   const arraysEqual = (array1, array2) => {
@@ -32,3 +33,5 @@ const verifyQuizAnswers = (data, quizState) => {
   
     return true;
   };
+
+  export default verifyQuizAnswers;
