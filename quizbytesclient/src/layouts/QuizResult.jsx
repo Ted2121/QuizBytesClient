@@ -2,9 +2,6 @@ import { Paper, Typography } from '@mui/material';
 import React from 'react'
 
 function QuizResult({correctAnswers, wrongAnswers, elapsedTime}) {
-    // console.log(clientSubmitTime);  
-    // const trimmedTime = elapsedTime.slice(11, 19);
-    
   return (
     <Paper 
     elevation={3}
