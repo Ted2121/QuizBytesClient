@@ -12,8 +12,8 @@ import Home from './pages/Home';
 import Demo from './pages/Demo';
 import Roadmap from './pages/Roadmap';
 import Quiz from './pages/Quiz';
-import SignUp from './pages/Signup';
-import LogIn from './pages/Login';
+import SignUp from './pages/SignUp';
+import LogIn from './pages/LogIn';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -43,11 +43,11 @@ function App() {
               <Route path='/' element={<RouteLayout />}>
                 {/* public routes */}
                 <Route path='/todo' element={<Home />} />
-                <Route path='/' element={<Demo />} />
+                <Route path='demo' element={<Demo />} />
                 <Route path='select' element={<QuizSelection />} />
                 <Route path='roadmap' element={<Roadmap />} />
                 <Route path='login' element={<LogIn />} />
-                <Route path='signup' element={<SignUp />} />
+                <Route path='/' element={<SignUp />} />
 
                 {/* private routes */}
                 <Route element={<RequireAuth />}>
