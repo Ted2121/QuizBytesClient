@@ -43,5 +43,63 @@ body {
   cursor: not-allowed;
 }
 
+.hide {
+  display: none;
+}
+
+.valid {
+  color: #7dffb3;
+}
+
+.invalid {
+  color: #e34965;
+}
+
+.validation__icon {
+  width: auto;
+  height: auto;
+  max-height: 21px;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-tooltip {
+  position: relative;
+  display: inline-block;
+  max-height: 21px;
+}
+
+.info-tooltip__text {
+  position: absolute;
+  right: 2vw;
+  width: 80vw;
+  max-width: 310px;
+  height: auto;
+  background-color: #333;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  line-height: 1.5;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  line-height: 1rem;
+}
+
+.info-tooltip:hover .info-tooltip__text {
+  opacity: 1;
+}
+
+@media only screen and (min-width: 1200px) {
+  .info-tooltip__text {
+    transform: translate(120%, -70%);
+  }
+}
+@media only screen and (min-width: 1536px) {
+  .info-tooltip__text {
+    transform: translateX(123%);
+  }
+}
 /* common */
 /* components *//*# sourceMappingURL=styles.css.map */

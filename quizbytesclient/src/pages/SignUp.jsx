@@ -22,8 +22,11 @@ function SignUp() {
       display: 'flex'
     }}>
       <SignUpForm
+        email={email}
         setEmail={setEmail}
+        displayName={displayName}
         setDisplayName={setDisplayName}
+        password={password}
         setPassword={setPassword}
         onSubmit={handleSubmit}
         onGoogleSignIn={handleGoogleLogin}

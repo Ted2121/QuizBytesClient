@@ -1,0 +1,35 @@
+@use 'variables' as *;
+
+.hide {
+    display: none;
+  }
+  
+  .valid {
+    color: $success;
+  }
+  
+  .invalid {
+    color: $error;
+  }
+  
+  .validation__icon {
+    width: auto;
+    height: auto;
+    max-height: 21px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // .validation__icon {
+  //   position: fixed;
+  //   left: 50vw;
+  //   top: 40vh;
+  //   // transform: translateY(-40%);
+  // }
+  
+  // .validation__icon {
+  //   // position: absolute;
+  //   left: -1.5rem;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  // }
