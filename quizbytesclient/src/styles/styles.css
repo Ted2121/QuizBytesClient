@@ -93,12 +93,17 @@ body {
 
 @media only screen and (min-width: 1200px) {
   .info-tooltip__text {
-    transform: translate(120%, -70%);
+    transform: translate(120%, -88%);
   }
 }
 @media only screen and (min-width: 1536px) {
   .info-tooltip__text {
-    transform: translateX(123%);
+    transform: translate(123%, -88%);
+  }
+}
+@media only screen and (min-width: 3800px) {
+  .info-tooltip__text {
+    transform: translate(133%, -88%);
   }
 }
 /* common */

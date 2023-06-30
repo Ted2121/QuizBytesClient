@@ -31,13 +31,20 @@
 
 @include lg {
     .info-tooltip__text {
-      transform: translate(120%, -70%);
-    //   transform: translateY(-50%);
+      transform: translate(120%, -88%);
     }
   }
 
   @include xl {
     .info-tooltip__text {
-      transform: translateX(123%);
+      transform: translate(123%, -88%);
     }
   }
+
+  @include xxl {
+    .info-tooltip__text {
+      transform: translate(133%, -88%);
+    }
+  }
+
+  

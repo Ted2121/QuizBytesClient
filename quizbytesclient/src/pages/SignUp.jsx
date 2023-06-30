@@ -4,7 +4,6 @@ import { Box } from '@mui/material';
 import { auth, googleProvider } from '../firebase';
 import { signInWithRedirect, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
-
 function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,6 +21,8 @@ function SignUp() {
     } catch (err) {
       console.error(err);
     }
+
+    
   }
 
   const handleGoogleLogin = async () => {

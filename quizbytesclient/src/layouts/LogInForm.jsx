@@ -1,11 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { AccountCircle } from '@mui/icons-material';
 import { Box, Button, Divider, InputAdornment, Paper, TextField } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 import { useNavigate } from 'react-router-dom';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin }) {
     const navigate = useNavigate();
+    const [passwordHidden, setPasswordHidden] = useState(true);
+
+    function toggleVisibility() {
+        setPasswordHidden(!passwordHidden);
+    };
 
     const handleSignupClick = () => {
         navigate('/signup');
@@ -44,7 +51,7 @@ function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin }) {
             <TextField
                 id="password-input-field"
                 placeholder='Password'
-                type='password'
+                type={passwordHidden ? 'password' : 'text'}
                 onChange={(e) => {setPassword(e.target.value)}}
                 sx={{
                     mt: '1rem',
@@ -56,6 +63,19 @@ function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin }) {
                             <LockIcon />
                         </InputAdornment>
                     ),
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            {passwordHidden ? 
+                            <VisibilityIcon 
+                            sx={{cursor:'pointer'}}
+                            onClick={toggleVisibility}/>
+                            :
+                            <VisibilityOffIcon 
+                            sx={{cursor:'pointer'}}
+                            onClick={toggleVisibility}/>
+                        }
+                        </InputAdornment>
+                    )
                 }}
                 variant="outlined" />
             <Box sx={{

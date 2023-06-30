@@ -6,7 +6,8 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import InfoTooltip from '../components/InfoTooltip';
 import ValidationSymbols from '../components/ValidationSymbols';
 import { useNavigate } from 'react-router-dom';
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 function SignUpForm({ email, setEmail, password, setPassword, displayName, setDisplayName, onSubmit, onGoogleSignIn }) {
     // must start with a letter
@@ -21,7 +22,7 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
     const [validDisplayName, setValidDisplayName] = useState(false);
     const [validEmail, setValidEmail] = useState(false);
     const [validPassword, setValidPassword] = useState(false);
-
+    const [passwordHidden, setPasswordHidden] = useState(true);
     const [status, setStatus] = useState('typing');
 
     const navigate = useNavigate();
@@ -70,7 +71,11 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
 
     function handleLoginClick() {
         navigate('/login');
-    }
+    };
+
+    function toggleVisibility() {
+        setPasswordHidden(!passwordHidden);
+    };
 
     return (
         <Paper
@@ -172,7 +177,7 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
                                 <InputAdornment position="start">
                                     <AccountCircle />
                                 </InputAdornment>
-                            ),
+                            )
                         }}
                         variant="outlined" />
                 </Grid>
@@ -198,7 +203,7 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
                     <TextField
                         id="password-input-field"
                         placeholder='Password'
-                        type='password'
+                        type={passwordHidden ? 'password' : 'text'}
                         onChange={(e) => {
                             setPassword(e.target.value);
                             setStatus('typing');
@@ -213,6 +218,19 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
                                     <LockIcon />
                                 </InputAdornment>
                             ),
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    {passwordHidden ? 
+                                    <VisibilityIcon 
+                                    sx={{cursor:'pointer'}}
+                                    onClick={toggleVisibility}/>
+                                    :
+                                    <VisibilityOffIcon 
+                                    sx={{cursor:'pointer'}}
+                                    onClick={toggleVisibility}/>
+                                }
+                                </InputAdornment>
+                            )
                         }}
                         variant="outlined" />
                 </Grid>
