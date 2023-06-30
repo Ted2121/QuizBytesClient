@@ -84,7 +84,10 @@ export const themeSettings = (mode) => {
                     },
                     black: {
                         main: colors.black[100]
-                    }
+                    },
+                    error: {
+                        main: '#E34965'
+                    },
                 }
                 : {
                     // palette values for light mode
@@ -117,7 +120,10 @@ export const themeSettings = (mode) => {
                     },
                     black: {
                         main: colors.black[100]
-                    }
+                    },
+                    error: {
+                        main: '#E34965'
+                    },
                 }),
         },
         typography: {
