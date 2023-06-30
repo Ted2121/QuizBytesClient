@@ -2,9 +2,15 @@ import React from 'react'
 import { AccountCircle } from '@mui/icons-material';
 import { Box, Button, Divider, InputAdornment, Paper, TextField } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
-
+import { useNavigate } from 'react-router-dom';
 
 function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin }) {
+    const navigate = useNavigate();
+
+    const handleSignupClick = () => {
+        navigate('/signup');
+    }
+
     return (
         <Paper
             elevation={3}
@@ -61,6 +67,7 @@ function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin }) {
                 <Button
                     color='white'
                     variant='contained'
+                    onClick={handleSignupClick}
                     sx={{
                         '&:hover': {
                             backgroundColor: 'secondary.main'

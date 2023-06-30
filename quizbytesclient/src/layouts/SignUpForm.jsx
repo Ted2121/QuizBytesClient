@@ -5,6 +5,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import InfoTooltip from '../components/InfoTooltip';
 import ValidationSymbols from '../components/ValidationSymbols';
+import { useNavigate } from 'react-router-dom';
 
 function SignUpForm({ email, setEmail, password, setPassword, displayName, setDisplayName, onSubmit, onGoogleSignIn }) {
     // must start with a letter
@@ -21,6 +22,8 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
     const [validPassword, setValidPassword] = useState(false);
 
     const [status, setStatus] = useState('typing');
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         emailRef.current.focus();
@@ -62,6 +65,11 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
             console.error(error);
         }
     };
+
+
+    function handleLoginClick() {
+        navigate('/login');
+    }
 
     return (
         <Paper
@@ -225,8 +233,8 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
                     }} >
                     <Button
                         color='white'
-                        onClick={handleOnSubmit}
                         variant='contained'
+                        onClick={handleLoginClick}
                         sx={{
                             '&:hover': {
                                 backgroundColor: 'primary.main'
@@ -237,6 +245,7 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
                     <Button
                         color='white'
                         variant='contained'
+                        onClick={handleOnSubmit}
                         sx={{
                             '&:hover': {
                                 backgroundColor: 'secondary.main'
