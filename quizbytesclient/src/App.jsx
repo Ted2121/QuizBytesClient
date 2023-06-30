@@ -20,7 +20,6 @@ function App() {
   const navbarHeight = '56px';
   const circleColor = '#f4c1b2';
 
-
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>

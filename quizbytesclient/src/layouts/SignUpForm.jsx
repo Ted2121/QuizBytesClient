@@ -7,6 +7,7 @@ import InfoTooltip from '../components/InfoTooltip';
 import ValidationSymbols from '../components/ValidationSymbols';
 import { useNavigate } from 'react-router-dom';
 
+
 function SignUpForm({ email, setEmail, password, setPassword, displayName, setDisplayName, onSubmit, onGoogleSignIn }) {
     // must start with a letter
     const NAME_REGEX = /^[A-Za-z][A-Za-z0-9]{4,18}$/;
