@@ -8,6 +8,7 @@ function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
+  const [status, setStatus] = useState('typing');
 
   const handleSubmit = async () => {
     try {
@@ -18,8 +19,14 @@ function SignUp() {
 
       console.log(auth?.currentUser?.email);
 
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
+      if (error.code === 'auth/email-already-in-use') {
+        console.log('email error');
+        setStatus("email error")
+      } else {
+        setStatus("error")
+      }
     }
 
     
@@ -49,6 +56,8 @@ function SignUp() {
         setPassword={setPassword}
         onSubmit={handleSubmit}
         onGoogleSignIn={handleGoogleLogin}
+        status={status}
+        setStatus={setStatus}
       />
     </Box>
   )

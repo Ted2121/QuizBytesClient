@@ -9,11 +9,23 @@ import { useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-function SignUpForm({ email, setEmail, password, setPassword, displayName, setDisplayName, onSubmit, onGoogleSignIn }) {
-    // must start with a letter
-    const NAME_REGEX = /^[A-Za-z][A-Za-z0-9]{4,18}$/;
+function SignUpForm({
+    email,
+    setEmail,
+    password,
+    setPassword,
+    displayName,
+    setDisplayName,
+    onSubmit,
+    onGoogleSignIn,
+    status,
+    setStatus, }) {
+    // must start with a letter.
+    // must be between 5 and 18 characters
+    const NAME_REGEX = /^[A-Za-z][A-Za-z0-9]{4,17}$/;
     // must contain atleast 1 lower-case letter, 1 upper-case letter and 1 symbol
-    const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{7,20}$/;
+    // must be between 6 and 20 characters
+    const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{6,20}$/;
     // must be a valid email address
     const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -23,9 +35,10 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
     const [validEmail, setValidEmail] = useState(false);
     const [validPassword, setValidPassword] = useState(false);
     const [passwordHidden, setPasswordHidden] = useState(true);
-    const [status, setStatus] = useState('typing');
 
     const navigate = useNavigate();
+
+    let errorMessage = null;
 
     useEffect(() => {
         emailRef.current.focus();
@@ -48,26 +61,24 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
     }, [password]);
 
     const handleOnSubmit = async (event) => {
-        try {
-            event.preventDefault();
-            // we validate again to prevent JS tampering attacks
-            const v1 = NAME_REGEX.test(displayName);
-            const v3 = EMAIL_REGEX.test(email);
-            const v2 = PASSWORD_REGEX.test(password);
+        event.preventDefault();
+        // we validate again to prevent JS tampering attacks
+        const v1 = NAME_REGEX.test(displayName);
+        const v3 = EMAIL_REGEX.test(email);
+        const v2 = PASSWORD_REGEX.test(password);
 
-            if (!v1 || !v2 || !v3) {
-                // console.log("error")
-                setStatus('error');
-                return;
-            }
-
-            onSubmit();
-
-        } catch (error) {
-            console.error(error);
+        if (!v1 || !v2 || !v3) {
+            // console.log("error")
+            setStatus('incomplete');
+            return;
         }
+
+        setStatus('submitting');
+        onSubmit();
     };
 
+    useEffect(() => {
+    }, [status, errorMessage]);
 
     function handleLoginClick() {
         navigate('/login');
@@ -76,6 +87,20 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
     function toggleVisibility() {
         setPasswordHidden(!passwordHidden);
     };
+
+    switch (status) {
+        case "error":
+            errorMessage = "An error has occurred.";
+            break;
+        case "email error":
+            errorMessage = "Email already exists.";
+            break;
+        case "incomplete":
+            errorMessage = "Please fill in all fields.";
+            break;
+        default:
+            errorMessage = null;
+    }
 
     return (
         <Paper
@@ -220,15 +245,15 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
                             ),
                             endAdornment: (
                                 <InputAdornment position="end">
-                                    {passwordHidden ? 
-                                    <VisibilityIcon 
-                                    sx={{cursor:'pointer'}}
-                                    onClick={toggleVisibility}/>
-                                    :
-                                    <VisibilityOffIcon 
-                                    sx={{cursor:'pointer'}}
-                                    onClick={toggleVisibility}/>
-                                }
+                                    {passwordHidden ?
+                                        <VisibilityIcon
+                                            sx={{ cursor: 'pointer' }}
+                                            onClick={toggleVisibility} />
+                                        :
+                                        <VisibilityOffIcon
+                                            sx={{ cursor: 'pointer' }}
+                                            onClick={toggleVisibility} />
+                                    }
                                 </InputAdornment>
                             )
                         }}
@@ -240,7 +265,6 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
                     alignItems: 'center'
                 }}>
                     <InfoTooltip text='Must contain atleast 1 lower-case letter, 1 upper-case letter and 1 symbol.' />
-
                 </Grid>
                 <Grid item xs={2} />
                 <Grid
@@ -265,26 +289,27 @@ function SignUpForm({ email, setEmail, password, setPassword, displayName, setDi
                         color='white'
                         variant='contained'
                         onClick={handleOnSubmit}
+                        disabled={status === 'submitting'}
                         sx={{
                             '&:hover': {
                                 backgroundColor: 'secondary.main'
                             }
                         }}>
                         Sign up</Button>
-
                 </Grid>
                 <Grid item xs={2} />
-                {status === 'error' &&
+                {console.log(status)}
+                {(
                     <Grid item xs={20} sx={{
                         display: 'flex',
                         justifyContent: "center",
                         alignItems: 'center'
                     }}>
                         <Typography sx={{ color: 'error.main' }}>
-                            Please fill in all fields.
+                            {errorMessage}
                         </Typography>
                     </Grid>
-                }
+                )}
                 <Grid item xs={20}>
                     <Divider
                         sx={{
