@@ -3,12 +3,17 @@ import SignUpForm from '../layouts/SignUpForm';
 import { Box } from '@mui/material';
 import { auth, googleProvider } from '../firebase';
 import { signInWithRedirect, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 
 function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [status, setStatus] = useState('typing');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = async () => {
     try {
@@ -16,6 +21,10 @@ function SignUp() {
       await updateProfile(auth.currentUser, {
         displayName: displayName,
       });
+
+      if (auth.currentUser) {
+        navigate(from, { replace: true });
+      }
 
       console.log(auth?.currentUser?.email);
 
@@ -29,14 +38,19 @@ function SignUp() {
       }
     }
 
-    
+
   }
 
   const handleGoogleLogin = async () => {
     try {
       await signInWithRedirect(auth, googleProvider);
+
+      if (auth.currentUser) {
+        navigate(from, { replace: true });
+      }
     } catch (error) {
       console.error(error);
+      setStatus('error');
     }
   }
 

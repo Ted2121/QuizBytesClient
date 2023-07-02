@@ -9,7 +9,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import AnswerGroup from './AnswerGroup';
 
-function BuiltQuiz({ data, onSubmit, startTime }) {
+function BuiltQuiz({ data, onSubmit, startTime = null, width }) {
 
 
     const [activeStep, setActiveStep] = React.useState(0);
@@ -49,6 +49,10 @@ function BuiltQuiz({ data, onSubmit, startTime }) {
     };
 
     const getCurrentTime = () => {
+        if(startTime == null) {
+            return "--:--"
+        }
+
         const endTime = new Date();
 
         const elapsedTimeInMs = endTime - startTime;
@@ -122,7 +126,7 @@ function BuiltQuiz({ data, onSubmit, startTime }) {
         <Paper
             elevation={5}
             sx={{
-                width: { xs: '85vw', sm: '70vw', md: '55vw', lg: '45vw', xl: '38vw', xxl: '20vw' },
+                width: width,
                 height: 'auto',
                 maxHeight: { xs: '83vh' },
                 bgcolor: 'primary.main',

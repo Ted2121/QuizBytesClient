@@ -41,12 +41,12 @@ function App() {
             <Routes>
               <Route path='/' element={<RouteLayout />}>
                 {/* public routes */}
-                <Route path='/todo' element={<Home />} />
+                <Route path='/' element={<Home />} />
                 <Route path='demo' element={<Demo />} />
                 <Route path='select' element={<QuizSelection />} />
                 <Route path='roadmap' element={<Roadmap />} />
                 <Route path='login' element={<LogIn />} />
-                <Route path='/' element={<SignUp />} />
+                <Route path='signup' element={<SignUp />} />
 
                 {/* private routes */}
                 <Route element={<RequireAuth />}>

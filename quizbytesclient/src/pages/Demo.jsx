@@ -16,7 +16,6 @@ function Demo() {
   const [wrongAnswers, setWrongAnswers] = useState([]);
 
   useEffect(() => {
-    // This code will run when the `quiz` state changes from `null` to a non-null value
     if (quiz !== null) {
       // console.log(`quiz state updated: ${quiz}`);
       setSubmitted(true);
@@ -24,8 +23,8 @@ function Demo() {
   }, [quiz]);
 
   const handleQuizSubmit = (quizState) => {
-    setQuiz(quizState);
     const { correctCount, wrongCount } = verifyQuizAnswers(data, quizState);
+    setQuiz(quizState);
     // console.log(correctCount);
     // console.log(wrongAnswers);
     setCorrectAnswers(correctCount);
@@ -46,7 +45,11 @@ function Demo() {
           elapsedTime={quiz.elapsedTime}
         />
       ) : (
-        <BuiltQuiz data={data} onSubmit={handleQuizSubmit} startTime={startTime}/>
+        <BuiltQuiz 
+        data={data} 
+        onSubmit={handleQuizSubmit} 
+        startTime={startTime} 
+        width={{xs: '85vw', sm: '70vw', md: '55vw', lg: '45vw', xl: '38vw', xxl: '20vw'}}/>
       )}
     </Box>
   );

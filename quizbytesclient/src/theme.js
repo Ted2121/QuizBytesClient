@@ -88,6 +88,9 @@ export const themeSettings = (mode) => {
                     error: {
                         main: '#E34965'
                     },
+                    selection : {
+                        main: '#FEEB75'
+                    },
                 }
                 : {
                     // palette values for light mode
@@ -123,6 +126,9 @@ export const themeSettings = (mode) => {
                     },
                     error: {
                         main: '#E34965'
+                    },
+                    selection : {
+                        main: '#FEEB75'
                     },
                 }),
         },

@@ -1,14 +1,15 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { AccountCircle } from '@mui/icons-material';
-import { Box, Button, Divider, InputAdornment, Paper, TextField } from '@mui/material';
+import { Box, Button, Divider, InputAdornment, Paper, TextField, Typography } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 import { useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin }) {
+function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin, status, setStatus }) {
     const navigate = useNavigate();
     const [passwordHidden, setPasswordHidden] = useState(true);
+    let errorMessage = null;
 
     function toggleVisibility() {
         setPasswordHidden(!passwordHidden);
@@ -16,6 +17,17 @@ function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin }) {
 
     const handleSignupClick = () => {
         navigate('/signup');
+    }
+
+    switch (status) {
+        case "error":
+            errorMessage = "An error has occurred.";
+            break;
+        case "invalid credentials":
+            errorMessage = "Invalid username or password";
+            break;
+        default:
+            errorMessage = null;
     }
 
     return (
@@ -35,7 +47,7 @@ function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin }) {
             <TextField
                 id="email-input-field"
                 placeholder='Email'
-                onChange={(e) => {setEmail(e.target.value)}}
+                onChange={(e) => { setEmail(e.target.value) }}
                 sx={{
                     mt: '1rem',
                     backgroundColor: 'white.main'
@@ -52,7 +64,7 @@ function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin }) {
                 id="password-input-field"
                 placeholder='Password'
                 type={passwordHidden ? 'password' : 'text'}
-                onChange={(e) => {setPassword(e.target.value)}}
+                onChange={(e) => { setPassword(e.target.value) }}
                 sx={{
                     mt: '1rem',
                     backgroundColor: 'white.main'
@@ -65,19 +77,29 @@ function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin }) {
                     ),
                     endAdornment: (
                         <InputAdornment position="end">
-                            {passwordHidden ? 
-                            <VisibilityIcon 
-                            sx={{cursor:'pointer'}}
-                            onClick={toggleVisibility}/>
-                            :
-                            <VisibilityOffIcon 
-                            sx={{cursor:'pointer'}}
-                            onClick={toggleVisibility}/>
-                        }
+                            {passwordHidden ?
+                                <VisibilityIcon
+                                    sx={{ cursor: 'pointer' }}
+                                    onClick={toggleVisibility} />
+                                :
+                                <VisibilityOffIcon
+                                    sx={{ cursor: 'pointer' }}
+                                    onClick={toggleVisibility} />
+                            }
                         </InputAdornment>
                     )
                 }}
                 variant="outlined" />
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+            }}>
+                <Typography sx={{ color: 'error.main', mt:'5px' }}>
+                    {errorMessage}
+                </Typography>
+            </Box>
             <Box sx={{
                 mt: '1rem',
                 display: 'flex',
@@ -98,6 +120,7 @@ function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin }) {
                     color='white'
                     onClick={onSubmit}
                     variant='contained'
+                    disabled={status === 'submitting'}
                     sx={{
                         '&:hover': {
                             backgroundColor: 'primary.main'
