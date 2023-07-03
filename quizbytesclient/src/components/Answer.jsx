@@ -14,26 +14,32 @@ function Answer({ id, label, isChecked, onCheckboxChange }) {
         cursor: 'pointer',
       }}>
         <Box sx={{ flexGrow: 1 }}>
-          <FormControlLabel
-            control={
-            <Checkbox 
-            id={id} 
-            checked={isChecked} 
-            onChange={onCheckboxChange}
-            sx={{
-              color: 'black',
-              '&.Mui-checked': {
-                color: 'white',
-                backgroundColor: 'white',
-                '& .MuiSvgIcon-root': {
-                  fill: 'black',
-                },
+        <FormControlLabel
+      control={
+        <Checkbox 
+          id={id} 
+          checked={isChecked} 
+          onChange={onCheckboxChange}
+          sx={{
+            color: 'black',
+            '&.Mui-checked': {
+              color: 'white',
+              backgroundColor: 'white',
+              '& .MuiSvgIcon-root': {
+                fill: 'black',
               },
-            }}
-            />}
-            label={label}
-            // 
-          />
+            },
+          }}
+        />
+      }
+      label={label}
+      sx={{
+        '& .MuiFormControlLabel-label': {
+          fontWeight: 500,
+          fontSize:'.9rem',
+        },
+      }}
+    />
         </Box>
       </label>
     );

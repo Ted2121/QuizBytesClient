@@ -17,6 +17,8 @@ import { Link, Navigate } from 'react-router-dom'
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import DrawerButton from '../components/DrawerButton';
+import SignUpButton from '../components/SignUpButton';
+import TryDemoButton from '../components/TryDemoButton';
 
 const drawerWidth = 240;
 const navItems = [{
@@ -79,16 +81,6 @@ function Navbar(props) {
   const signUpDrawerButton = (
     <Link to='signup' style={{ textDecoration: 'none' }}>
       <DrawerButton id='signup' text='Sign up'/>
-    </Link>
-  );
-
-  const signUpButton = (
-    <Link to='signup' style={{ textDecoration: 'none', marginLeft: '25px' }}>
-      <Button
-        variant='outlined'
-        color='white'>
-        Sign Up
-      </Button>
     </Link>
   );
 
@@ -173,14 +165,9 @@ function Navbar(props) {
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-              <Link to='demo' style={{ textDecoration: 'none' }}>
-                <Button
-                  variant='contained'
-                  sx={{ fontWeight: 600 }}>
-                  Try Demo
-                </Button>
-              </Link>
-              {auth?.token ? signOutButton : signUpButton}
+              <TryDemoButton />
+              {/* TODO change the auth thing*/}
+              {auth?.token ? signOutButton : <SignUpButton marginLeft='25px' />}
             </Box>
             <Link to='login' style={{ textDecoration: 'none', marginLeft: '25px' }}>
               <IconButton

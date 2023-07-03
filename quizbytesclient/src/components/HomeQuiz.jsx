@@ -1,9 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import BuiltQuiz from '../layouts/BuiltQuiz';
 import homeQuiz from '../data/homeQuestions'
-import { Box, Typography } from '@mui/material';
-import QuizResult from '../layouts/QuizResult';
-import verifyQuizAnswers from '../service/demoQuizVerifier';
+import { Typography } from '@mui/material';
 
 function HomeQuiz() {
     const data = homeQuiz;
@@ -47,7 +45,7 @@ function HomeQuiz() {
             <BuiltQuiz
                 data={data}
                 onSubmit={handleQuizSubmit}
-                width={{ xs: '85vw', sm: '70vw', md: '55vw', lg: '32vw', xl: '32vw', xxl: '20vw' }} />
+                width={{ xs: '85vw', sm: '70vw', md: '55vw', lg: '31vw', xl: '31vw', xxl: '24vw' }} />
             {console.log(submitText)}
             {(submitted &&
                 <Typography 

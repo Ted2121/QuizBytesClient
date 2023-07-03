@@ -124,13 +124,14 @@ function BuiltQuiz({ data, onSubmit, startTime = null, width }) {
 
     return (
         <Paper
-            elevation={5}
+            elevation={0}
             sx={{
                 width: width,
-                height: 'auto',
+                // height: 'auto',
                 maxHeight: { xs: '83vh' },
                 bgcolor: 'primary.main',
                 overflow: 'hidden',
+                border: '1px solid'
             }}>
             <Paper
                 square
