@@ -7,18 +7,29 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Chapter from './Chapter';
 import { Box, Button } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Link, Route } from 'react-router-dom';
-import RouteLayout from './RouteLayout';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { CourseContext } from '../context/CourseContext';
 
-function CourseAccordion({ id, course, chapters }) {
+function CourseAccordion({ id, courseName, chaptersList }) {
+  const { course, setCourse } = useContext(CourseContext);
+
+  const handleRoadmapClick = () => {
+    const courseObject = {
+      courseName, chaptersList
+    };
+
+    setCourse(courseObject);
+  };
+
   return (
     <Accordion square={true}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        aria-controls={`${course}-content`}
+        aria-controls={`${courseName}-content`}
         id={id}
       >
-        <Typography variant='h4'>{course}</Typography>
+        <Typography variant='h4'>{courseName}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', mb: '15px' }}>
@@ -30,6 +41,7 @@ function CourseAccordion({ id, course, chapters }) {
               variant='outlined'
               color='black'
               endIcon={<ArrowForwardIosIcon style={{ fontSize: '0.7rem' }} />}
+              onClick={handleRoadmapClick}
               sx={{
                 fontSize: '0.8rem',
                 '&:hover': {
@@ -41,7 +53,7 @@ function CourseAccordion({ id, course, chapters }) {
             </Button>
           </Link>
         </Box>
-        {chapters.map((item, index) => (
+        {chaptersList.map((item, index) => (
           <Chapter key={index} id={index} chapter={item} />
         ))}
       </AccordionDetails>

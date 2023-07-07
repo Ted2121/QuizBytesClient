@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import BuiltQuiz from '../layouts/BuiltQuiz';
 import homeQuiz from '../data/homeQuestions'
-import { Typography } from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 
 function HomeQuiz() {
     const data = homeQuiz;
@@ -42,11 +42,16 @@ function HomeQuiz() {
 
     return (
         <>
+        <Divider sx={{
+            display:{xs:'block', lg:'none'}, 
+            margin:'20px 0px', 
+            width:'60%',
+            backgroundColor:'black.main'}}/>
             <BuiltQuiz
                 data={data}
                 onSubmit={handleQuizSubmit}
                 width={{ xs: '85vw', sm: '70vw', md: '55vw', lg: '31vw', xl: '31vw', xxl: '24vw' }} />
-            {console.log(submitText)}
+            {/* {console.log(submitText)} */}
             {(submitted &&
                 <Typography 
                 variant='h3'
@@ -56,6 +61,11 @@ function HomeQuiz() {
                 }}>
                     {submitText}
                 </Typography>)}
+                <Divider sx={{
+            display:{xs:'block', lg:'none'}, 
+            margin:'20px 0px', 
+            width:'60%',
+            backgroundColor:'black.main'}}/>
         </>
     )
 }

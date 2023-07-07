@@ -14,6 +14,7 @@ import Roadmap from './pages/Roadmap';
 import Quiz from './pages/Quiz';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
+import { CourseProvider } from './context/CourseContext';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -24,7 +25,7 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', overflow:'auto', height:'auto' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', overflow: 'auto', height: 'auto' }}>
           <Navbar />
           <Box
             className='main'
@@ -34,26 +35,28 @@ function App() {
               marginTop: navbarHeight,
               minHeight: '100%',
               minWidth: '100%',
-              justifyContent: 'center', 
-              overflow:'auto', 
-              height:'auto' 
+              justifyContent: 'center',
+              overflow: 'auto',
+              height: 'auto'
             }}>
-            <Routes>
-              <Route path='/' element={<RouteLayout />}>
-                {/* public routes */}
-                <Route path='/' element={<Home />} />
-                <Route path='demo' element={<Demo />} />
-                <Route path='select' element={<QuizSelection />} />
-                <Route path='roadmap' element={<Roadmap />} />
-                <Route path='login' element={<LogIn />} />
-                <Route path='signup' element={<SignUp />} />
+            <CourseProvider>
+              <Routes>
+                <Route path='/' element={<RouteLayout />}>
+                  {/* public routes */}
+                  <Route path='/' element={<Home />} />
+                  <Route path='demo' element={<Demo />} />
+                  <Route path='select' element={<QuizSelection />} />
+                  <Route path='roadmap' element={<Roadmap />} />
+                  <Route path='login' element={<LogIn />} />
+                  <Route path='signup' element={<SignUp />} />
 
-                {/* private routes */}
-                <Route element={<RequireAuth />}>
-                  <Route path='/quiz' element={<Quiz />} />
+                  {/* private routes */}
+                  <Route element={<RequireAuth />}>
+                    <Route path='/quiz' element={<Quiz />} />
+                  </Route>
                 </Route>
-              </Route>
-            </Routes>
+              </Routes>
+            </CourseProvider>
 
           </Box>
           <DecorativeCircle

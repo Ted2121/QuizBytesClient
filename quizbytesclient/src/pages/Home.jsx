@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Divider, Grid, Typography } from '@mui/material';
 import React from 'react'
 import HomeQuiz from '../components/HomeQuiz';
 import TryDemoButton from '../components/TryDemoButton';
@@ -30,8 +30,10 @@ function Home() {
             maxWidth: { xxs: '90vw', sm: '376px', xl: '450px', xxl: '560px' }
           }}>
           <Typography
-            variant='h1'
-            fontWeight={500}>
+            fontWeight={500}
+            sx={{
+              fontSize:{xxs:'1.9rem'}
+            }}>
             Quizzes for Students
           </Typography>
           <Typography sx={{
@@ -78,7 +80,6 @@ function Home() {
         sx={{
           display: 'flex',
           justifyContent: 'center',
-          // flexDirection:'column'
         }}>
         <Box
           sx={{
@@ -89,8 +90,10 @@ function Home() {
             paddingBottom: '20px'
           }}>
           <Typography
-            variant='h1'
-            fontWeight={500}>
+            fontWeight={500}
+            sx={{
+              fontSize:{xxs:'1.9rem'}
+            }}>
             Quizzes for Anyone
           </Typography>
           <Typography sx={{

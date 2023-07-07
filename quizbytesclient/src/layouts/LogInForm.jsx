@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin, status, setStatus }) {
+function LogInForm({ setEmail, setPassword, onSubmit, onGoogleSignIn, status, setStatus }) {
     const navigate = useNavigate();
     const [passwordHidden, setPasswordHidden] = useState(true);
     let errorMessage = null;
@@ -96,7 +96,7 @@ function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin, status, set
                 alignItems: 'center',
                 width: '100%',
             }}>
-                <Typography sx={{ color: 'error.main', mt:'5px' }}>
+                <Typography sx={{ color: 'error.main', mt: '5px' }}>
                     {errorMessage}
                 </Typography>
             </Box>
@@ -133,19 +133,21 @@ function LogInForm({ setEmail, setPassword, onSubmit, onGoogleLogin, status, set
             }}>
                 or
             </Divider>
-            <Button sx={{
-                textTransform: 'none',
-                fontSize: '0.8rem',
-                color: '#757575',
-                m: '1rem 0',
-                minHeight: '2.5rem',
-                backgroundColor: 'white.main',
-                '&:hover': {
-                    color: 'grey.dark',
-                    backgroundColor: '#FAFBFB'
-                }
-            }}
-                className="login-with-google-btn" onClick={onGoogleLogin} >
+            <Button
+                sx={{
+                    textTransform: 'none',
+                    fontSize: '0.8rem',
+                    color: '#757575',
+                    m: '1rem 0',
+                    minHeight: '2.5rem',
+                    backgroundColor: 'white.main',
+                    '&:hover': {
+                        color: 'grey.dark',
+                        backgroundColor: '#FAFBFB'
+                    }
+                }}
+                className="login-with-google-btn" 
+                onClick={onGoogleSignIn} >
                 Continue with Google
             </Button>
         </Paper>

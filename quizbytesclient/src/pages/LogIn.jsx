@@ -36,6 +36,7 @@ function LogIn() {
 
   const handleGoogleLogin = async () => {
     try {
+      console.log('i was clicked');
       await signInWithRedirect(auth, googleProvider);
       
       if (auth.currentUser) {

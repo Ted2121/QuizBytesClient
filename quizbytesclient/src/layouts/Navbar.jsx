@@ -132,15 +132,15 @@ function Navbar(props) {
               aria-label='open drawer'
               edge='start'
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' }, }}>
+              sx={{ mr: 2, display: { md: 'none' }, }}>
               <MenuIcon
                 fontSize='large'
                 sx={{ color: 'white.main' }} />
             </IconButton>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Box sx={{ display: { xxs: 'none', md: 'block' } }}>
               {logo}
             </Box>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Box sx={{ display: { xxs: 'none', md: 'block' } }}>
               {navItems.map((item) => (
                 <Link key={item.id} to={item.route} style={{ textDecoration: 'none' }}>
                   <Button
@@ -188,7 +188,7 @@ function Navbar(props) {
           keepMounted: true,
         }}
         sx={{
-          display: { xs: 'block', sm: 'none' },
+          display: { xxs: 'block', md: 'none' },
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
         }}
         PaperProps={{
