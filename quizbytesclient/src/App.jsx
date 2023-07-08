@@ -46,6 +46,7 @@ function App() {
                   <Route path='/' element={<Home />} />
                   <Route path='demo' element={<Demo />} />
                   <Route path='select' element={<QuizSelection />} />
+                  {/* TODO change path to roadmap */}
                   <Route path='roadmap' element={<Roadmap />} />
                   <Route path='login' element={<LogIn />} />
                   <Route path='signup' element={<SignUp />} />

@@ -12,7 +12,7 @@ import { useContext } from 'react';
 import { CourseContext } from '../context/CourseContext';
 
 function CourseAccordion({ id, courseName, chaptersList }) {
-  const { course, setCourse } = useContext(CourseContext);
+  const { setCourse } = useContext(CourseContext);
 
   const handleRoadmapClick = () => {
     const courseObject = {

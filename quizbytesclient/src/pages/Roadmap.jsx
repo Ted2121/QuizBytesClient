@@ -1,12 +1,32 @@
 import React from 'react'
 import { useContext } from 'react';
 import { CourseContext } from '../context/CourseContext';
+import { Grid } from '@mui/material';
+import BuiltRoadmap from '../layouts/BuiltRoadmap';
 
 function Roadmap() {
   const { course } = useContext(CourseContext);
   console.log(course);
+  // TODO if course is null or undefined, get it from local storage
   return (
-    <div>Roadmap</div>
+    <Grid container columns={12}>
+      {/* Left panel */}
+      <Grid item xs={0} lg={3}>
+
+      </Grid>
+      {/* Overview panel */}
+      <Grid item xs={0} md={1} >
+
+      </Grid>
+      {/* Built Roadmap panel */}
+      <Grid item xs={12} md={6} lg={4}>
+        <BuiltRoadmap courseName={course?.courseName} chaptersList={course?.chaptersList}/>
+      </Grid>
+      {/* Right panel */}
+      <Grid item xs={0} md={5} lg={4}>
+
+      </Grid>
+    </Grid>
   )
 }
 

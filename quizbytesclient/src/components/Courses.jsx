@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import CourseAccordion from './CourseAccordion';
-import { CourseProvider } from '../context/CourseContext';
 
 function Courses({ data }) {
     return (

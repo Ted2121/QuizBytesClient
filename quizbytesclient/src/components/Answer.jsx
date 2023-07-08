@@ -1,5 +1,5 @@
 import { Box, Checkbox, FormControlLabel } from '@mui/material'
-import {React, useState} from 'react'
+import {React } from 'react'
 
 function Answer({ id, label, isChecked, onCheckboxChange }) {
     return (
