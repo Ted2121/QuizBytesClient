@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import ChapterCompletedIcon from '../components/ChapterCompletedIcon';
 import ChapterInProgressIcon from '../components/ChapterInProgressIcon';
 import ChapterIncompleteIcon from '../components/ChapterIncompleteIcon';
+import RoadmapSectionTitle from '../components/RoadmapSectionTitle';
 
 
 
@@ -75,7 +76,7 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression }) {
                 mt: '20px',
                 backgroundColor: 'grey.dark',
                 p: '30px',
-                maxHeight: {xxs:'68vh', sm:'75vh'},
+                maxHeight: {xxs:'68vh', sm:'75vh', md:'79vh'},
                 overflow: 'auto',
                 borderRadius:'8px'
             }}>
@@ -129,8 +130,8 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression }) {
                                 index % 2 === 0
                                 ? Math.floor(index / 2) % 2 === 0
                                     ? '10px'
-                                    : '10px'
-                                : '0px',
+                                    : '0px'
+                                : '10px',
                             },
                         }}
                     >
@@ -140,7 +141,7 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression }) {
                                 <Typography
                                     sx={{
                                         color: 'white.main',
-                                        fontSize: { xxs: '1.2rem' },
+                                        fontSize: { xxs: '1.2rem', lg:'1.3rem' },
                                     }}>
                                     {chapter.chapter}
                                 </Typography>
@@ -154,13 +155,11 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression }) {
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Typography variant='h2' sx={{ margin: '20px 0 10px 0' }}>
-                {courseName}
-            </Typography>
-            <Divider sx={{ width: '80%', backgroundColor: 'black.main' }} />
-            <Grid container columns={10}>
+            <RoadmapSectionTitle text={courseName} />
+            
+            <Grid container columns={16}>
                 <Grid item xs={1} />
-                <Grid item xs={8}>
+                <Grid item xs={14}>
                     {chaptersContainer}
                 </Grid>
                 <Grid item xs={1} />

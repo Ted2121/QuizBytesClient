@@ -21,11 +21,18 @@ import SignUpButton from '../components/SignUpButton';
 import TryDemoButton from '../components/TryDemoButton';
 
 const drawerWidth = 240;
-const navItems = [{
-  id: '0',
-  text: 'Quiz',
-  route: 'select'
-}];
+const navItems = [
+  {
+    id: '0',
+    text: 'Quiz',
+    route: 'select'
+  },
+  {
+    id:'1',
+    text: 'Learn',
+    route: 'learn'
+  },
+];
 
 const drawerItems = [
   {
@@ -42,6 +49,11 @@ const drawerItems = [
     id: '2',
     text: 'Demo',
     route: 'demo'
+  },
+  {
+    id:'3',
+    text: 'Learn',
+    route: 'learn'
   },
 ];
 
@@ -80,7 +92,7 @@ function Navbar(props) {
 
   const signUpDrawerButton = (
     <Link to='signup' style={{ textDecoration: 'none' }}>
-      <DrawerButton id='signup' text='Sign up'/>
+      <DrawerButton id='signup' text='Sign up' />
     </Link>
   );
 

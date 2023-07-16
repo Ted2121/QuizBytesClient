@@ -149,7 +149,6 @@ export const themeSettings = (mode) => {
             },
             h2: {
                 fontSize: 32,
-                fontFamily: '"Baloo Da 2", Roboto, sans-serif',
             },
             h3: {
                 fontSize: 24,
