@@ -2,6 +2,8 @@ import React from 'react';
 import RoadmapSectionTitle from '../components/RoadmapSectionTitle';
 import { Box } from '@mui/material';
 import RoadmapPlayerStats from '../components/RoadmapPlayerStats';
+import RoadmapQuests from '../components/RoadmapQuests';
+import RoadmapLeaderboard from '../components/RoadmapLeaderboard';
 
 function LeftSideRoadmap() {
     return (
@@ -16,6 +18,8 @@ function LeftSideRoadmap() {
         }}>
             <RoadmapSectionTitle text='Road so far'/>
             <RoadmapPlayerStats />
+            <RoadmapQuests />
+            <RoadmapLeaderboard />
         </Box>
     )
 }

@@ -54,7 +54,7 @@ function CourseAccordion({ id, courseName, chaptersList }) {
           </Link>
         </Box>
         {chaptersList.map((item, index) => (
-          <Chapter key={index} id={index} chapter={item} />
+          <Chapter key={index} id={index} chapter={item.title} />
         ))}
       </AccordionDetails>
     </Accordion>

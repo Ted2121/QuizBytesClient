@@ -7,7 +7,7 @@ import RoadmapSectionTitle from '../components/RoadmapSectionTitle';
 
 
 
-function BuiltRoadmap({ courseName, chaptersList, courseProgression }) {
+function BuiltRoadmap({ courseName, chaptersList, courseProgression, onSetOpenChapter }) {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const timerRef = useRef(null);
     const chaptersWithIcons = [];
@@ -31,30 +31,36 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression }) {
         setHoveredIndex(null);
     }
 
+    function handleOnSetOpenChapter(index) {
+        return () => {
+            onSetOpenChapter(index);
+        };
+    }
+
     function assignIcons() {
         let foundNonMatching = false;
         for (let i = 0; i < chaptersList?.length; i++) {
             const chapter = chaptersList[i];
             const isCompleted = courseProgression?.chapters.some(progressChapter =>
-                progressChapter.toLowerCase() === chapter.toLowerCase()
+                progressChapter.toLowerCase() === chapter.title.toLowerCase()
               );
             let transformedChapter = {};
 
             if (isCompleted) {
                 transformedChapter = {
-                    chapter: chapter,
+                    chapter: chapter.title,
                     icon: <ChapterCompletedIcon />
                 }
 
             } else if (!isCompleted && !foundNonMatching) {
                 foundNonMatching = true;
                 transformedChapter = {
-                    chapter: chapter,
+                    chapter: chapter.title,
                     icon: <ChapterInProgressIcon />
                 }
             } else if (!isCompleted && foundNonMatching) {
                 transformedChapter = {
-                    chapter: chapter,
+                    chapter: chapter.title,
                     icon: <ChapterIncompleteIcon />
                 }
                 console.log('here');
@@ -71,14 +77,14 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression }) {
     const chaptersContainer = (
         <Card
             display="flex"
-            flexDirection="column"
             sx={{
                 mt: '20px',
                 backgroundColor: 'grey.dark',
                 p: '30px',
                 maxHeight: {xxs:'68vh', sm:'75vh', md:'79vh'},
                 overflow: 'auto',
-                borderRadius:'8px'
+                borderRadius:'8px',
+                flexDirection:'column'
             }}>
             {chaptersWithIcons?.map((chapter, index) => (
                 <Box
@@ -93,12 +99,14 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression }) {
                                     : 'flex-end'
                                 : 'center'
                     }}>
+                        {console.log(index)}
                     <IconButton
                         variant="contained"
                         onTouchStart={() => handleTouchStart(index)}
                         onTouchEnd={handleTouchEnd}
                         onMouseEnter={() => handleMouseEnter(index)}
                         onMouseLeave={handleMouseLeave}
+                        onClick={handleOnSetOpenChapter(index)}
                         sx={{
                             width: 'fit-content',
                             mt: '20px',
