@@ -1,6 +1,7 @@
 import React from 'react';
 import RoadmapSectionTitle from '../components/RoadmapSectionTitle';
 import { Box } from '@mui/material';
+import RoadmapChapterDescription from '../components/RoadmapChapterDescription';
 
 function RightSideRoadmap({openChapter}) {
   return (
@@ -12,6 +13,7 @@ function RightSideRoadmap({openChapter}) {
         p: '0px 20px',
     }}>
         <RoadmapSectionTitle text={openChapter?.title}/>
+        <RoadmapChapterDescription description={openChapter?.description}/>
     </Box>
   )
 }

@@ -24,11 +24,16 @@ const drawerWidth = 240;
 const navItems = [
   {
     id: '0',
-    text: 'Quiz',
+    text: 'Courses',
     route: 'select'
   },
   {
-    id:'1',
+    id: '1',
+    text: 'Quiz',
+    route: 'roadmap'
+  },
+  {
+    id:'2',
     text: 'Learn',
     route: 'learn'
   },
@@ -42,16 +47,21 @@ const drawerItems = [
   },
   {
     id: '1',
-    text: 'Quiz',
+    text: 'Courses',
     route: 'select'
   },
   {
     id: '2',
+    text: 'Quiz',
+    route: 'select'
+  },
+  {
+    id: '3',
     text: 'Demo',
     route: 'demo'
   },
   {
-    id:'3',
+    id:'4',
     text: 'Learn',
     route: 'learn'
   },

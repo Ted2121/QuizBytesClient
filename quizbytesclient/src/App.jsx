@@ -3,7 +3,7 @@ import './styles/styles.css';
 import { ColorModeContext, useMode } from './theme';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import Navbar from './layouts/Navbar';
-import QuizSelection from './pages/QuizSelection';
+import CourseSelection from './pages/CourseSelection';
 import DecorativeCircle from './components/DecorativeCircle';
 import { Route, Routes } from 'react-router-dom';
 import RouteLayout from './components/RouteLayout';
@@ -15,6 +15,7 @@ import Quiz from './pages/Quiz';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import { CourseProvider } from './context/CourseContext';
+import Learn from './pages/Learn';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -45,11 +46,11 @@ function App() {
                   {/* public routes */}
                   <Route path='/' element={<Home />} />
                   <Route path='demo' element={<Demo />} />
-                  <Route path='select' element={<QuizSelection />} />
-                  {/* TODO change path to roadmap */}
+                  <Route path='select' element={<CourseSelection />} />
                   <Route path='roadmap' element={<Roadmap />} />
                   <Route path='login' element={<LogIn />} />
                   <Route path='signup' element={<SignUp />} />
+                  <Route path='learn' element={<Learn />} />
 
                   {/* private routes */}
                   <Route element={<RequireAuth />}>

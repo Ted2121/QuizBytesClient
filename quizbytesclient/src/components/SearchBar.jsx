@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 
 function SearchBar({ placeholder, onChange}) {
     return (
-        <Box sx={{ display: 'flex', alignItems: 'center'}}>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb:'10px'}}>
             <SearchIcon fontSize='large' sx={{ marginRight: '10px' }} />
             <Input
                 placeholder={placeholder}

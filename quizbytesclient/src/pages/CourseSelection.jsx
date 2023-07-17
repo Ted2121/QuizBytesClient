@@ -1,8 +1,8 @@
 import React from 'react'
-import QuizSelectionMenu from '../layouts/QuizSelectionMenu'
+import CourseSelectionMenu from '../layouts/CourseSelectionMenu'
 import Box from '@mui/material/Box'
 
-function QuizSelection() {
+function CourseSelection() {
     return (
         <Box
             sx={{
@@ -13,9 +13,9 @@ function QuizSelection() {
                 maxHeight: '60vh'
             }}
         >
-            <QuizSelectionMenu />
+            <CourseSelectionMenu />
         </Box>
     )
 }
 
-export default QuizSelection;
+export default CourseSelection;

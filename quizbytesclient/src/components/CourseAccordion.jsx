@@ -40,7 +40,7 @@ function CourseAccordion({ id, courseName, chaptersList }) {
             <Button
               variant='outlined'
               color='black'
-              endIcon={<ArrowForwardIosIcon style={{ fontSize: '0.7rem' }} />}
+              // endIcon={<ArrowForwardIosIcon style={{ fontSize: '0.7rem' }} />}
               onClick={handleRoadmapClick}
               sx={{
                 fontSize: '0.8rem',
@@ -49,7 +49,22 @@ function CourseAccordion({ id, courseName, chaptersList }) {
                 },
               }}
             >
-              Roadmap
+              Quiz
+            </Button>
+          </Link>
+          <Link to='/learn' style={{ textDecoration: 'none' }}>
+            <Button
+              variant='outlined'
+              color='black'
+              onClick={handleRoadmapClick}
+              sx={{
+                fontSize: '0.8rem',
+                '&:hover': {
+                  backgroundColor: 'secondary.light'
+                },
+              }}
+            >
+              Learn
             </Button>
           </Link>
         </Box>
