@@ -15,7 +15,7 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression, onSetOpenCh
     function handleTouchStart(index) {
         timerRef.current = setTimeout(() => {
             setHoveredIndex(index);
-        }, 500); // Set the duration for a long press here
+        }, 600); // Set the duration for a long press here
     }
 
     function handleTouchEnd() {
@@ -63,12 +63,12 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression, onSetOpenCh
                     chapter: chapter.title,
                     icon: <ChapterIncompleteIcon />
                 }
-                console.log('here');
+                // console.log('here');
             }
             chaptersWithIcons.push(transformedChapter);
         };
 
-        console.log(chaptersWithIcons);
+        // console.log(chaptersWithIcons);
 
     }
 
@@ -81,7 +81,7 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression, onSetOpenCh
                 mt: '20px',
                 backgroundColor: 'grey.dark',
                 p: '30px',
-                maxHeight: {xxs:'68vh', sm:'75vh', md:'79vh'},
+                maxHeight: {xxs:'69vh', sm:'75vh', md:'78vh', lg:'79vh'},
                 overflow: 'auto',
                 borderRadius:'8px',
                 flexDirection:'column'
@@ -99,7 +99,7 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression, onSetOpenCh
                                     : 'flex-end'
                                 : 'center'
                     }}>
-                        {console.log(index)}
+                        {/* {console.log(index)} */}
                     <IconButton
                         variant="contained"
                         onTouchStart={() => handleTouchStart(index)}
@@ -166,11 +166,11 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression, onSetOpenCh
             <RoadmapSectionTitle text={courseName} />
             
             <Grid container columns={16}>
-                <Grid item xs={1} />
-                <Grid item xs={14}>
+                <Grid item xxs={1} />
+                <Grid item xxs={14}>
                     {chaptersContainer}
                 </Grid>
-                <Grid item xs={1} />
+                <Grid item xxs={1} />
             </Grid>
         </Box>
     )

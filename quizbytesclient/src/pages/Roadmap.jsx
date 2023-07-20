@@ -7,17 +7,39 @@ import { getCompletedChaptersInCourseAsync } from '../service/userRequestsFacade
 import LeftSideRoadmap from '../layouts/LeftSideRoadmap';
 import RightSideRoadmap from '../layouts/RightSideRoadmap';
 import { useNavigate, useLocation } from 'react-router-dom';
+import RoadmapBottomBar from '../components/RoadmapBottomBar';
 
 function Roadmap() {
   const { course } = useContext(CourseContext);
   const [isLoading, setIsLoading] = useState(true);
   const [courseProgression, setCourseProgression] = useState(null);
-  const [openChapter, setOpenChapter] = useState(course?.chaptersList[0])
+  const [openChapter, setOpenChapter] = useState(course?.chaptersList[0]);
+
+  // mobile drawer states
+  const [isStatsOpen, setIsStatsOpen] = useState(false);
+  const [isQuestsOpen, setIsQuestsOpen] = useState(false);
+  const [isLeaderboardOpen, setIsLeaderboardOpen] = useState(false);
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/select";
 
+  function handleStatsToggleClick() {
+    setIsStatsOpen((prevState) => !prevState);
+  }
 
+  function handleQuestsToggleClick() {
+    setIsQuestsOpen((prevState) => !prevState);
+  }
+
+  function handleLeaderboardToggleClick() {
+    setIsLeaderboardOpen((prevState) => !prevState);
+  }
+
+  function handleDescriptionToggleClick() {
+    setIsDescriptionOpen((prevState) => !prevState);
+  }
 
   useEffect(() => {
     const fetchCourseProgression = async () => {
@@ -65,27 +87,44 @@ function Roadmap() {
   }
 
   return (
-    <Grid container columns={12} sx={{
-      mt: '20px'
-    }}>
-      {/* Left panel */}
-      <Grid item xs={0} lg={3}>
-        <LeftSideRoadmap />
-      </Grid>
+    <>
+      <Grid container columns={12} sx={{
+        mt: '20px'
+      }}>
+        {/* Left panel */}
+        <Grid item xxs={0} lg={3} sx={{
+          display: { xxs: 'none', lg: 'block' }
+        }}>
+          <LeftSideRoadmap />
+        </Grid>
 
-      {/* Built Roadmap panel */}
-      <Grid item xs={12} md={7} lg={6}>
-        <BuiltRoadmap
-          courseName={course?.courseName}
-          chaptersList={course?.chaptersList}
-          courseProgression={courseProgression}
-          onSetOpenChapter={handleSetOpenChapter} />
+        {/* Built Roadmap panel */}
+        <Grid item xxs={12} md={7} lg={6}>
+          <BuiltRoadmap
+            courseName={course?.courseName}
+            chaptersList={course?.chaptersList}
+            courseProgression={courseProgression}
+            onSetOpenChapter={handleSetOpenChapter} />
+        </Grid>
+        {/* Right panel */}
+        <Grid item xxs={0} md={5} lg={3} sx={{
+          display: { xxs: 'none', md: 'block' }
+        }}>
+          <RightSideRoadmap openChapter={openChapter} />
+        </Grid>
       </Grid>
-      {/* Right panel */}
-      <Grid item xs={0} md={5} lg={3}>
-        <RightSideRoadmap openChapter={openChapter} />
-      </Grid>
-    </Grid>
+      <Box sx={{
+        display: { xxs: 'block', lg: 'none' },
+        position: 'fixed',
+        bottom: 0,
+      }}>
+        <RoadmapBottomBar
+          onStatsToggleClick={handleStatsToggleClick}
+          onQuestsToggleClick={handleQuestsToggleClick}
+          onLeaderboardToggleClick={handleLeaderboardToggleClick} />
+      </Box>
+    </>
+
   )
 }
 

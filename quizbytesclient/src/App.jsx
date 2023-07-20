@@ -27,20 +27,20 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', overflow: 'auto', height: 'auto' }}>
-          <Navbar />
-          <Box
-            className='main'
-            sx={{
-              display: 'flex',
-              flex: 1,
-              marginTop: navbarHeight,
-              minHeight: '100%',
-              minWidth: '100%',
-              justifyContent: 'center',
-              overflow: 'auto',
-              height: 'auto'
-            }}>
-            <CourseProvider>
+          <CourseProvider>
+            <Navbar />
+            <Box
+              className='main'
+              sx={{
+                display: 'flex',
+                flex: 1,
+                marginTop: navbarHeight,
+                minHeight: '100%',
+                minWidth: '100%',
+                justifyContent: 'center',
+                overflow: 'auto',
+                height: 'auto'
+              }}>
               <Routes>
                 <Route path='/' element={<RouteLayout />}>
                   {/* public routes */}
@@ -58,9 +58,9 @@ function App() {
                   </Route>
                 </Route>
               </Routes>
-            </CourseProvider>
 
-          </Box>
+            </Box>
+          </CourseProvider>
           <DecorativeCircle
             color={circleColor}
             sx={{

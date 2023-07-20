@@ -8,7 +8,7 @@ function RoadmapSectionTitle({ text, fontColor }) {
         <>
         <Typography
             sx={{
-                fontSize: { md: '1.1rem', lg: '1.5rem' },
+                fontSize: { xxs: '1.1rem', lg: '1.5rem' },
                 fontWeight:'400',
                 color: fontColor,
             }}>

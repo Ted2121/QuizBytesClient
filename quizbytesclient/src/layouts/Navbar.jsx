@@ -19,61 +19,97 @@ import useAuth from '../hooks/useAuth';
 import DrawerButton from '../components/DrawerButton';
 import SignUpButton from '../components/SignUpButton';
 import TryDemoButton from '../components/TryDemoButton';
+import { useContext } from 'react';
+import { CourseContext } from '../context/CourseContext';
 
-const drawerWidth = 240;
-const navItems = [
-  {
-    id: '0',
-    text: 'Courses',
-    route: 'select'
-  },
-  {
-    id: '1',
-    text: 'Quiz',
-    route: 'roadmap'
-  },
-  {
-    id:'2',
-    text: 'Learn',
-    route: 'learn'
-  },
-];
-
-const drawerItems = [
-  {
-    id: '0',
-    text: 'Home',
-    route: '/'
-  },
-  {
-    id: '1',
-    text: 'Courses',
-    route: 'select'
-  },
-  {
-    id: '2',
-    text: 'Quiz',
-    route: 'select'
-  },
-  {
-    id: '3',
-    text: 'Demo',
-    route: 'demo'
-  },
-  {
-    id:'4',
-    text: 'Learn',
-    route: 'learn'
-  },
-];
 
 function Navbar(props) {
+  const { course } = useContext(CourseContext);
+
+  const drawerWidth = 240;
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { auth, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
+  const [navItems, setNavItems] = React.useState([]);
+  const [drawerItems, setDrawerItems] = React.useState([]);
+
+  React.useEffect(() => {
+    const updatedNavItems = course
+      ? [
+        {
+          id: '0',
+          text: 'Catalog',
+          route: 'select',
+        },
+        {
+          id: '1',
+          text: 'Quiz',
+          route: 'roadmap',
+        },
+        {
+          id: '2',
+          text: 'Learn',
+          route: 'learn',
+        },
+      ]
+      : [
+        {
+          id: '0',
+          text: 'Catalog',
+          route: 'select',
+        },
+      ];
+
+    const updatedDrawerItems = course ? [
+      {
+        id: '0',
+        text: 'Home',
+        route: '/'
+      },
+      {
+        id: '1',
+        text: 'Catalog',
+        route: 'select'
+      },
+      {
+        id: '2',
+        text: 'Demo',
+        route: 'demo'
+      },
+      {
+        id: '3',
+        text: 'Quiz',
+        route: 'roadmap'
+      },
+      {
+        id: '4',
+        text: 'Learn',
+        route: 'learn'
+      },
+    ]
+      : [
+        {
+          id: '0',
+          text: 'Home',
+          route: '/'
+        },
+        {
+          id: '1',
+          text: 'Catalog',
+          route: 'select'
+        },
+        {
+          id: '2',
+          text: 'Demo',
+          route: 'demo'
+        },
+      ]
+    setDrawerItems(updatedDrawerItems);
+    setNavItems(updatedNavItems);
+  }, [course]);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);

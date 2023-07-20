@@ -36,11 +36,15 @@ function CourseAccordion({ id, courseName, chaptersList }) {
           <Typography variant='h5'>
             Syllabus:
           </Typography>
+          <Box sx={{
+            display:'flex',
+            flexDirection:'row',
+            columnGap: 1
+          }}>
           <Link to='/roadmap' style={{ textDecoration: 'none' }}>
             <Button
               variant='outlined'
               color='black'
-              // endIcon={<ArrowForwardIosIcon style={{ fontSize: '0.7rem' }} />}
               onClick={handleRoadmapClick}
               sx={{
                 fontSize: '0.8rem',
@@ -67,6 +71,7 @@ function CourseAccordion({ id, courseName, chaptersList }) {
               Learn
             </Button>
           </Link>
+          </Box>
         </Box>
         {chaptersList.map((item, index) => (
           <Chapter key={index} id={index} chapter={item.title} />
