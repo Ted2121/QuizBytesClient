@@ -9,7 +9,10 @@ import RightSideRoadmap from '../layouts/RightSideRoadmap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import RoadmapBottomBar from '../components/RoadmapBottomBar';
 import { useMediaQuery } from 'react-responsive';
-import DescriptionMobileDrawer from '../components/DescriptionMobileDrawer';
+import MobileDrawer from '../components/MobileDrawer';
+import RoadmapPlayerStats from '../components/RoadmapPlayerStats';
+import RoadmapQuests from '../components/RoadmapQuests';
+import RoadmapLeaderboard from '../components/RoadmapLeaderboard';
 
 function Roadmap() {
   const { course } = useContext(CourseContext);
@@ -93,7 +96,7 @@ function Roadmap() {
     )
   }
 
-  console.log(isDescriptionOpen);
+  // console.log(isDescriptionOpen);
 
   return (
     <>
@@ -131,10 +134,27 @@ function Roadmap() {
           onQuestsToggleClick={handleQuestsToggleClick}
           onLeaderboardToggleClick={handleLeaderboardToggleClick} />
       </Box>
-      <DescriptionMobileDrawer 
-      openChapter={openChapter} 
-      isDescriptionOpen={isDescriptionOpen}
-      onDescriptionToggleClick={handleDescriptionToggleClick}/>
+      {/* Description drawer */}
+      <MobileDrawer 
+      isOpen={isDescriptionOpen}
+      onToggleClick={handleDescriptionToggleClick}
+      content={<RightSideRoadmap paddingTop='10px' cardElevation={0} fontColor='white.main' openChapter={openChapter} />}/>
+      {/* Stats drawer */}
+      <MobileDrawer 
+      isOpen={isStatsOpen}
+      onToggleClick={handleStatsToggleClick}
+      // TODO userStats
+      content={<RoadmapPlayerStats cardElevation={0} userStats={null}/>}/> 
+      {/* Quests drawer */}
+      <MobileDrawer 
+      isOpen={isQuestsOpen}
+      onToggleClick={handleQuestsToggleClick}
+      content={<RoadmapQuests cardElevation={0} />}/>
+      {/* Leaderboard drawer */}
+      <MobileDrawer 
+      isOpen={isLeaderboardOpen}
+      onToggleClick={handleLeaderboardToggleClick}
+      content={<RoadmapLeaderboard cardElevation={0} />}/>
     </>
   )
 }

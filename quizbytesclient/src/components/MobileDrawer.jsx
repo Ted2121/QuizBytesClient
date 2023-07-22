@@ -1,17 +1,17 @@
 import React from 'react';
 import { Box, Drawer } from '@mui/material';
-import RightSideRoadmap from '../layouts/RightSideRoadmap';
 
-function DescriptionMobileDrawer({window, openChapter, isDescriptionOpen, onDescriptionToggleClick}) {
-    const drawerWidth = 270;
+function MobileDrawer({window, isOpen, onToggleClick, content}) {
+    const xxsDrawerWidth = 240;
+    const mobileDrawerWidth = 270;
+    const tabletDrawerWidth = 370;
     const container = window !== undefined ? () => window().document.body : undefined;
-    console.log(isDescriptionOpen);
   return (
     <Drawer 
     container={container}
     variant='temporary'
-    open={isDescriptionOpen}
-    onClose={onDescriptionToggleClick}
+    open={isOpen}
+    onClose={onToggleClick}
     ModalProps={{
       keepMounted: true,
     }}
@@ -19,7 +19,7 @@ function DescriptionMobileDrawer({window, openChapter, isDescriptionOpen, onDesc
       display: { xxs: 'block', md: 'none' },
       '& .MuiDrawer-paper': { 
         boxSizing: 'border-box', 
-        width: drawerWidth, },
+        width: {xxs:xxsDrawerWidth, xs:mobileDrawerWidth, sm:tabletDrawerWidth} },
     }}
     PaperProps={{
       sx: {
@@ -27,13 +27,14 @@ function DescriptionMobileDrawer({window, openChapter, isDescriptionOpen, onDesc
       },
     }}>
       <Box sx={{
-        mt:'75px'
+        mt:'65px',
+        ml:'5px',
+        mr:'5px'
       }}>
-        <RightSideRoadmap cardElevation='0' fontColor='white.main' openChapter={openChapter} />
-
+        {content}
       </Box>
     </Drawer>
   )
 }
 
-export default DescriptionMobileDrawer;
+export default MobileDrawer;
