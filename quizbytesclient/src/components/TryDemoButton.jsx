@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function TryDemoButton() {
     return (
-        <Link to='demo' style={{ textDecoration: 'none' }}>
+        <Link to='/demo' style={{ textDecoration: 'none' }}>
             <Button
                 variant='contained'
                 sx={{ fontWeight: 600 }}>

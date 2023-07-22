@@ -221,7 +221,7 @@ function Navbar(props) {
             </Box>
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Box sx={{ display: { xxs: 'none', sm: 'block' } }}>
               <TryDemoButton />
               {/* TODO change the auth thing*/}
               {auth?.token ? signOutButton : <SignUpButton marginLeft='25px' />}
