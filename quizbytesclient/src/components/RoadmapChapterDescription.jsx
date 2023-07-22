@@ -2,9 +2,11 @@ import { Box, Button, Card, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function RoadmapChapterDescription({ description }) {
+function RoadmapChapterDescription({elevation, description }) {
   return (
-    <Card sx={{
+    <Card 
+    elevation={elevation || 1}
+    sx={{
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -12,8 +14,8 @@ function RoadmapChapterDescription({ description }) {
       mt: '20px',
       backgroundColor: 'grey.dark',
       p: '10px',
-      overflow: 'auto',
-      borderRadius: '8px'
+      overflow: 'auto', 
+      borderRadius: '8px',
     }}>
       <Typography sx={{
         fontSize: '1.2rem',

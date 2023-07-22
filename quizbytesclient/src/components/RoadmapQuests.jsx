@@ -15,14 +15,14 @@ function RoadmapQuests() {
             overflow: 'auto',
             borderRadius: '8px'
         }}>
-            <RoadmapSectionTitle text='Quests' fontColor='white.main'/>
-                <Typography variant='h3' sx={{
-                    color:'white.main',
-                    mt:'10px'
-                }}>
+            <RoadmapSectionTitle text='Quests' fontColor='white.main' />
+            <Typography variant='h3' sx={{
+                color: 'white.main',
+                mt: '10px'
+            }}>
                 Coming soon!
-                </Typography>
-        </Card> 
+            </Typography>
+        </Card>
     )
 }
 

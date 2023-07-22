@@ -153,7 +153,6 @@ function Navbar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', }}>
-
       <Box sx={{ mt: '10px' }}>
         {logo}
       </Box>

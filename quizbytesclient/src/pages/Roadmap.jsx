@@ -8,6 +8,8 @@ import LeftSideRoadmap from '../layouts/LeftSideRoadmap';
 import RightSideRoadmap from '../layouts/RightSideRoadmap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import RoadmapBottomBar from '../components/RoadmapBottomBar';
+import { useMediaQuery } from 'react-responsive';
+import DescriptionMobileDrawer from '../components/DescriptionMobileDrawer';
 
 function Roadmap() {
   const { course } = useContext(CourseContext);
@@ -24,6 +26,8 @@ function Roadmap() {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/select";
+
+  const isMobileDevice = useMediaQuery({ maxWidth: 899 });
 
   function handleStatsToggleClick() {
     setIsStatsOpen((prevState) => !prevState);
@@ -66,11 +70,14 @@ function Roadmap() {
   // TODO if course is null or undefined, get it from local storage
 
   function handleSetOpenChapter(index) {
-    setOpenChapter(course?.chaptersList[index])
+    setOpenChapter(course?.chaptersList[index]);
+
+    if(isMobileDevice) {
+      handleDescriptionToggleClick();
+    }
   }
 
   if (isLoading) {
-    // Render loading indicator or blank screen
     return (
       <Box
         sx={{
@@ -86,6 +93,8 @@ function Roadmap() {
     )
   }
 
+  console.log(isDescriptionOpen);
+
   return (
     <>
       <Grid container columns={12} sx={{
@@ -97,7 +106,6 @@ function Roadmap() {
         }}>
           <LeftSideRoadmap />
         </Grid>
-
         {/* Built Roadmap panel */}
         <Grid item xxs={12} md={7} lg={6}>
           <BuiltRoadmap
@@ -110,7 +118,7 @@ function Roadmap() {
         <Grid item xxs={0} md={5} lg={3} sx={{
           display: { xxs: 'none', md: 'block' }
         }}>
-          <RightSideRoadmap openChapter={openChapter} />
+          <RightSideRoadmap fontColor='black.main' openChapter={openChapter} />
         </Grid>
       </Grid>
       <Box sx={{
@@ -123,8 +131,11 @@ function Roadmap() {
           onQuestsToggleClick={handleQuestsToggleClick}
           onLeaderboardToggleClick={handleLeaderboardToggleClick} />
       </Box>
+      <DescriptionMobileDrawer 
+      openChapter={openChapter} 
+      isDescriptionOpen={isDescriptionOpen}
+      onDescriptionToggleClick={handleDescriptionToggleClick}/>
     </>
-
   )
 }
 
