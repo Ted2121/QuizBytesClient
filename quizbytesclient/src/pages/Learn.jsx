@@ -9,13 +9,15 @@ function Learn() {
       flexDirection:'column',
       justifyContent:'center',
       alignItems:'center',
+      maxWidth:'80vw',
       gap:2,
+      textAlign:'center',
     }}>
 <Typography variant='h1'>
 This feature is coming soon!
 </Typography>
 <Typography variant='h1'>
-In the meantime, feel free to try the demo
+In the meantime, feel free to
 </Typography>
 <TryDemoButton/>
     </Box>

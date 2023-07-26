@@ -2,8 +2,7 @@ import { Box, Button, Card, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function RoadmapChapterDescription({cardElevation, description }) {
-  // console.log(cardElevation)
+function RoadmapChapterDescription({onStartQuizClick, cardElevation, description, difficultySetter }) {
   const elevation = cardElevation === null || cardElevation === undefined ? 1 : cardElevation;
 
   return (
@@ -27,6 +26,7 @@ function RoadmapChapterDescription({cardElevation, description }) {
       }}>
         {description}
       </Typography>
+      {difficultySetter}
       <Box sx={{
         display: 'flex',
         flexDirection: 'row',
@@ -40,7 +40,9 @@ function RoadmapChapterDescription({cardElevation, description }) {
             Learn
           </Button>
         </Link>
-        <Button variant='outlined'>
+        <Button 
+        variant='outlined'
+        onClick={onStartQuizClick}>
           Start Quiz
         </Button>
       </Box>

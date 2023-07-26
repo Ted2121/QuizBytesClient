@@ -57,7 +57,8 @@ function HomeQuiz() {
                 variant='h3'
                 sx={{
                     mt:'20px',
-                    textAlign:'center'
+                    textAlign:'center',
+                    maxWidth:'90vw'
                 }}>
                     {submitText}
                 </Typography>)}

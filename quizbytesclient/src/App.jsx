@@ -16,6 +16,7 @@ import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import { CourseProvider } from './context/CourseContext';
 import Learn from './pages/Learn';
+import ServerError from './pages/ServerError';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -51,6 +52,7 @@ function App() {
                   <Route path='login' element={<LogIn />} />
                   <Route path='signup' element={<SignUp />} />
                   <Route path='learn' element={<Learn />} />
+                  <Route path='server-error' element={<ServerError />} />
 
                   {/* private routes */}
                   <Route element={<RequireAuth />}>

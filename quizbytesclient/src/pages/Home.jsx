@@ -4,15 +4,21 @@ import HomeQuiz from '../components/HomeQuiz';
 import TryDemoButton from '../components/TryDemoButton';
 import SignInButton from '../components/LogInButton';
 import SignUpButton from '../components/SignUpButton';
+import Footer from '../layouts/Footer';
 
 function Home() {
   return (
+    <Box sx={{
+      width:'100vw',
+      maxWidth:'100vw'
+    }}>
     <Grid
       container
       spacing={2}
       columns={12}
       sx={{
-        p: '2rem'
+        p: {xxs:'0rem', md:'2rem'},
+        minHeight:'100vh'
       }}>
       <Grid item xxl={2} sx={{
         display: { xs: 'none', xxl: 'block' }
@@ -158,7 +164,6 @@ function Home() {
               to start your adventure.
             </Typography>
           </Box>
-
         </Box>
       </Grid>
       <Grid xxl={2}
@@ -166,6 +171,8 @@ function Home() {
           display: { xs: 'none', xxl: 'block' }
         }} />
     </Grid>
+        <Footer />
+    </Box>
   )
 }
 

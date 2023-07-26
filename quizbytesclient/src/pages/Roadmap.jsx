@@ -13,12 +13,16 @@ import MobileDrawer from '../components/MobileDrawer';
 import RoadmapPlayerStats from '../components/RoadmapPlayerStats';
 import RoadmapQuests from '../components/RoadmapQuests';
 import RoadmapLeaderboard from '../components/RoadmapLeaderboard';
+import { getQuizAsync } from '../service/quizRequestsFacade';
+import Quiz from './Quiz';
+import useAuth from '../hooks/useAuth';
 
 function Roadmap() {
   const { course } = useContext(CourseContext);
   const [isLoading, setIsLoading] = useState(true);
   const [courseProgression, setCourseProgression] = useState(null);
   const [openChapter, setOpenChapter] = useState(course?.chaptersList[0]);
+  const [difficultyLevel, setDifficultyLevel] = useState(1);
 
   // mobile drawer states
   const [isStatsOpen, setIsStatsOpen] = useState(false);
@@ -31,6 +35,8 @@ function Roadmap() {
   const from = location.state?.from?.pathname || "/select";
 
   const isMobileDevice = useMediaQuery({ maxWidth: 899 });
+
+  const {auth} = useAuth();
 
   function handleStatsToggleClick() {
     setIsStatsOpen((prevState) => !prevState);
@@ -69,15 +75,34 @@ function Roadmap() {
     }
   }, [course, from, navigate]);
 
-  // console.log(course);
   // TODO if course is null or undefined, get it from local storage
 
   function handleSetOpenChapter(index) {
     setOpenChapter(course?.chaptersList[index]);
 
-    if(isMobileDevice) {
+    if (isMobileDevice) {
       handleDescriptionToggleClick();
     }
+  }
+
+  function handleDifficultyChange(difficulty) {
+    setDifficultyLevel(difficulty);
+  }
+
+  async function handleStartQuizClick() {
+    // console.log(openChapter);
+    try {
+
+      const data = await getQuizAsync(openChapter?.title, difficultyLevel, 20, auth?.token);
+      
+      return (
+        <Quiz data={data} />
+      );
+    } catch (error) {
+      console.error(error);
+      navigate('/server-error');
+    }
+
   }
 
   if (isLoading) {
@@ -121,7 +146,12 @@ function Roadmap() {
         <Grid item xxs={0} md={5} lg={3} sx={{
           display: { xxs: 'none', md: 'block' }
         }}>
-          <RightSideRoadmap fontColor='black.main' openChapter={openChapter} />
+          <RightSideRoadmap
+            onStartQuizClick={handleStartQuizClick}
+            fontColor='black.main'
+            openChapter={openChapter}
+            onDifficultyChange={handleDifficultyChange}
+            selectedDifficulty={difficultyLevel} />
         </Grid>
       </Grid>
       <Box sx={{
@@ -135,26 +165,32 @@ function Roadmap() {
           onLeaderboardToggleClick={handleLeaderboardToggleClick} />
       </Box>
       {/* Description drawer */}
-      <MobileDrawer 
-      isOpen={isDescriptionOpen}
-      onToggleClick={handleDescriptionToggleClick}
-      content={<RightSideRoadmap paddingTop='10px' cardElevation={0} fontColor='white.main' openChapter={openChapter} />}/>
+      <MobileDrawer
+        isOpen={isDescriptionOpen}
+        onToggleClick={handleDescriptionToggleClick}
+        content={<RightSideRoadmap
+          onDifficultyChange={handleDifficultyChange}
+          selectedDifficulty={difficultyLevel}
+          onStartQuizClick={handleStartQuizClick}
+          paddingTop='10px' cardElevation={0}
+          fontColor='white.main'
+          openChapter={openChapter} />} />
       {/* Stats drawer */}
-      <MobileDrawer 
-      isOpen={isStatsOpen}
-      onToggleClick={handleStatsToggleClick}
-      // TODO userStats
-      content={<RoadmapPlayerStats cardElevation={0} userStats={null}/>}/> 
+      <MobileDrawer
+        isOpen={isStatsOpen}
+        onToggleClick={handleStatsToggleClick}
+        // TODO userStats
+        content={<RoadmapPlayerStats cardElevation={0} userStats={null} />} />
       {/* Quests drawer */}
-      <MobileDrawer 
-      isOpen={isQuestsOpen}
-      onToggleClick={handleQuestsToggleClick}
-      content={<RoadmapQuests cardElevation={0} />}/>
+      <MobileDrawer
+        isOpen={isQuestsOpen}
+        onToggleClick={handleQuestsToggleClick}
+        content={<RoadmapQuests cardElevation={0} />} />
       {/* Leaderboard drawer */}
-      <MobileDrawer 
-      isOpen={isLeaderboardOpen}
-      onToggleClick={handleLeaderboardToggleClick}
-      content={<RoadmapLeaderboard cardElevation={0} />}/>
+      <MobileDrawer
+        isOpen={isLeaderboardOpen}
+        onToggleClick={handleLeaderboardToggleClick}
+        content={<RoadmapLeaderboard cardElevation={0} />} />
     </>
   )
 }
