@@ -1,7 +1,7 @@
 import {React, useState, useEffect } from 'react'
 import BuiltQuiz from '../layouts/BuiltQuiz';
 import demoQuiz from '../data/demoQuestions'
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import QuizResult from '../layouts/QuizResult';
 import verifyQuizAnswers from '../service/demoQuizVerifier';
 
@@ -45,11 +45,27 @@ function Demo() {
           elapsedTime={quiz.elapsedTime}
         />
       ) : (
+        <Box sx={{
+          display:'flex',
+          flexDirection:'column'
+        }}>
         <BuiltQuiz 
         data={data} 
         onSubmit={handleQuizSubmit} 
         startTime={startTime} 
-        width={{xs: '85vw', sm: '70vw', md: '55vw', lg: '45vw', xl: '38vw', xxl: '20vw'}}/>
+        width={{
+          xs: '85vw', 
+          sm: '70vw', 
+          md: '55vw', 
+          lg: '42vw', 
+          xl: '36vw', 
+          xxl: '19vw'}}/>
+        <Typography sx={{
+          fontSize:'.9rem'
+        }}>
+          *Select all that apply.
+        </Typography>
+        </Box>
       )}
     </Box>
   );

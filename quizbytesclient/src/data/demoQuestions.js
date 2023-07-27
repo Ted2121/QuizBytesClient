@@ -20,11 +20,11 @@ const demoQuiz = {
         },
         {
             id: "2",
-            text: "Which HTTP status code indicates that the server understands the request but refuses to authorize it?",
+            text: "Which (if any) HTTP status codes indicate that the server understands the request but refuses to authorize it?",
             course: "Demo",
             chapter: "Web Development",
             difficultyLevel: 1,
-            possibleAnswers: ["401 Unauthorized", "403 Forbidden", "404 Not Found", "500 Internal Server Error"],
+            possibleAnswers: ["401 Unauthorized", "403 Forbidden", "404 Not Found", "None of the above"],
             correctAnswers: ["401 Unauthorized", "403 Forbidden"]
         },
         {
@@ -56,11 +56,11 @@ const demoQuiz = {
         },
         {
             id: "6",
-            text: "Which HTTP status code indicates a successful response?",
+            text: "Which (if any) HTTP status codes indicate a successful response?",
             course: "Demo",
             chapter: "Web Development",
             difficultyLevel: 1,
-            possibleAnswers: ["200 OK", "404 Not Found", "500 Internal Server Error", "201 Created"],
+            possibleAnswers: ["200 OK", "201 Created", "302 Found", "None of the above"],
             correctAnswers: ["200 OK", "201 Created"]
         },
         {
@@ -177,7 +177,7 @@ const demoQuiz = {
             course: "Demo",
             chapter: "Web Development",
             difficultyLevel: 1,
-            possibleAnswers: ["200 OK", "400 Bad Request", "404 Not Found", "500 Internal Server Error", "204 No Content"],
+            possibleAnswers: ["400 Bad Request", "404 Not Found", "500 Internal Server Error", "204 No Content"],
             correctAnswers: ["400 Bad Request", "404 Not Found"]
         },
     ]
