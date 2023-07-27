@@ -298,7 +298,7 @@ function SignUpForm({
                         Sign up</Button>
                 </Grid>
                 <Grid item xs={2} />
-                {console.log(status)}
+                {/* {console.log(status)} */}
                 {(
                     <Grid item xs={20} sx={{
                         display: 'flex',

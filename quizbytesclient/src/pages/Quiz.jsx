@@ -4,7 +4,6 @@ import useAuth from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { submitQuizAsync } from '../service/quizRequestsFacade';
 
-
 function Quiz({ data }) {
   const navigate = useNavigate();
   const { auth } = useAuth();

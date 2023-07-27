@@ -4,9 +4,12 @@ import { Box } from '@mui/material';
 import { auth, googleProvider } from '../firebase';
 import { signInWithRedirect, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 
 function SignUp() {
+  const { setAuth } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -22,10 +25,17 @@ function SignUp() {
         displayName: displayName,
       });
 
-      if (auth.currentUser) {
+      const user = auth?.currentUser;
+
+      if (user) {
+        // Get the user's ID token
+        const token = await user.getIdToken();
+
+        // Set the user and token in the AuthContext
+        setAuth({ token: token, user: user });
+
         navigate(from, { replace: true });
       }
-
       console.log(auth?.currentUser?.email);
 
     } catch (error) {

@@ -146,7 +146,8 @@ function Navbar(props) {
     <Button
       variant='outlined'
       color='white'
-      onClick={handleSignOut}>
+      onClick={handleSignOut}
+      sx={{marginLeft:'25px' }}>
       Sign Out
     </Button>
   );
@@ -171,6 +172,9 @@ function Navbar(props) {
             </ListItem>
           </Link>
         ))}
+        {/* {console.log(`this is the token: ${auth?.token}`)}
+        {console.log(`this is the user: ${auth?.currentUser}`)}
+        {console.log(auth?.currentUser?.displayName)} */}
         {auth?.token ? signOutDrawerButton : signUpDrawerButton}
       </List>
     </Box>
@@ -223,7 +227,6 @@ function Navbar(props) {
           <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             <Box sx={{ display: { xxs: 'none', sm: 'block' } }}>
               <TryDemoButton />
-              {/* TODO change the auth thing*/}
               {auth?.token ? signOutButton : <SignUpButton marginLeft='25px' />}
             </Box>
             <Link to='login' style={{ textDecoration: 'none', marginLeft: '25px' }}>
