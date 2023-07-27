@@ -11,7 +11,6 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Logo from '../assets/Logo.png'
 import { Link } from 'react-router-dom'
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -21,6 +20,7 @@ import SignUpButton from '../components/SignUpButton';
 import TryDemoButton from '../components/TryDemoButton';
 import { useContext } from 'react';
 import { CourseContext } from '../context/CourseContext';
+import LoginAndProfileButton from '../components/LoginAndProfileButton';
 
 
 function Navbar(props) {
@@ -147,7 +147,7 @@ function Navbar(props) {
       variant='outlined'
       color='white'
       onClick={handleSignOut}
-      sx={{marginLeft:'25px' }}>
+      sx={{ marginLeft: '25px' }}>
       Sign Out
     </Button>
   );
@@ -229,13 +229,7 @@ function Navbar(props) {
               <TryDemoButton />
               {auth?.token ? signOutButton : <SignUpButton marginLeft='25px' />}
             </Box>
-            <Link to='login' style={{ textDecoration: 'none', marginLeft: '25px' }}>
-              <IconButton
-                color='white'
-                aria-label='log in'>
-                <AccountCircleIcon fontSize='large' />
-              </IconButton>
-            </Link>
+            {auth?.token ? <LoginAndProfileButton linkTo='/profile'/> : <LoginAndProfileButton linkTo='/login'/>}
           </Box>
         </Toolbar>
       </AppBar>
