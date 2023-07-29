@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import ChapterCompletedIcon from '../components/ChapterCompletedIcon';
 import ChapterInProgressIcon from '../components/ChapterInProgressIcon';
 import ChapterIncompleteIcon from '../components/ChapterIncompleteIcon';
-import RoadmapSectionTitle from '../components/RoadmapSectionTitle';
+import SectionTitle from '../components/SectionTitle';
 
 
 
@@ -163,7 +163,7 @@ function BuiltRoadmap({ courseName, chaptersList, courseProgression, onSetOpenCh
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <RoadmapSectionTitle text={courseName} />
+            <SectionTitle text={courseName} />
             
             <Grid container columns={16}>
                 <Grid item xxs={1} />

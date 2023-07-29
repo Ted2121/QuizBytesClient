@@ -74,7 +74,7 @@ const demoQuiz = {
         },
         {
             id: "8",
-            text: "Which HTTP methods are considered safe and can be used for read-only operations? (Select all that apply)",
+            text: "Which HTTP methods are considered safe and can be used for read-only operations?",
             course: "Demo",
             chapter: "Web Development",
             difficultyLevel: 1,
@@ -92,7 +92,7 @@ const demoQuiz = {
         },
         {
             id: "10",
-            text: "Which of the following are valid HTTP methods? (Select all that apply)",
+            text: "Which of the following are valid HTTP methods?",
             course: "Demo",
             chapter: "Web Development",
             difficultyLevel: 1,

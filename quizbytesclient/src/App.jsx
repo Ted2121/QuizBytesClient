@@ -54,10 +54,10 @@ function App() {
                   <Route path='signup' element={<SignUp />} />
                   <Route path='learn' element={<Learn />} />
                   <Route path='server-error' element={<ServerError />} />
-                  <Route path='profile' element={<Profile />} />
                   {/* private routes */}
                   <Route element={<RequireAuth />}>
                     <Route path='/quiz' element={<Quiz />} />
+                    <Route path='profile' element={<Profile />} />
                   </Route>
                 </Route>
               </Routes>

@@ -1,6 +1,6 @@
 import { Box, Card, Divider, Typography } from '@mui/material';
 import React from 'react';
-import RoadmapSectionTitle from './RoadmapSectionTitle';
+import SectionTitle from './SectionTitle';
 import PlayerStat from './PlayerStat';
 
 function RoadmapPlayerStats({ cardElevation, userStats }) {
@@ -19,7 +19,7 @@ function RoadmapPlayerStats({ cardElevation, userStats }) {
                 overflow: 'auto',
                 borderRadius: '8px'
             }}>
-            <RoadmapSectionTitle text='Stats' fontColor='white.main' />
+            <SectionTitle text='Stats' fontColor='white.main' />
             <Box sx={{
                 mt: '10px'
             }}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import RoadmapSectionTitle from '../components/RoadmapSectionTitle';
+import SectionTitle from '../components/SectionTitle';
 import { Box, Divider, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import RoadmapChapterDescription from '../components/RoadmapChapterDescription';
 
@@ -72,7 +72,7 @@ function RightSideRoadmap({ selectedDifficulty, onDifficultyChange, onStartQuizC
         p: '0px 20px',
         pt: pt
       }}>
-      <RoadmapSectionTitle fontColor={fontColor} text={openChapter?.title} />
+      <SectionTitle fontColor={fontColor} text={openChapter?.title} />
       <RoadmapChapterDescription difficultySetter={difficultySetter} onStartQuizClick={onStartQuizClick} cardElevation={cardElevation} description={openChapter?.description} />
     </Box>
   )

@@ -42,7 +42,7 @@ function LogIn() {
     }
   }
 
-  console.log(auth?.currentUser?.displayName);
+  // console.log(auth?.currentUser?.displayName);
 
   const handleGoogleLogin = async () => {
     try {
@@ -52,7 +52,7 @@ function LogIn() {
       if (auth.currentUser) {
         navigate(from, { replace: true });
       }
-      console.log(auth?.currentUser?.displayName)
+      // console.log(auth?.currentUser?.displayName)
     } catch (error) {
       console.error(error);
       setStatus('error');

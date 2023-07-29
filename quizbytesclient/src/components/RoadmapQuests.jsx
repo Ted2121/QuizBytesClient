@@ -1,5 +1,5 @@
 import React from 'react';
-import RoadmapSectionTitle from './RoadmapSectionTitle';
+import SectionTitle from './SectionTitle';
 import { Box, Card, Typography } from '@mui/material';
 
 function RoadmapQuests({ cardElevation }) {
@@ -19,7 +19,7 @@ function RoadmapQuests({ cardElevation }) {
                 borderRadius: '8px',
                 minHeight: '150px'
             }}>
-            <RoadmapSectionTitle text='Quests' fontColor='white.main' />
+            <SectionTitle text='Quests' fontColor='white.main' />
             <Typography variant='h3' sx={{
                 color: 'white.main',
                 mt: '10px'

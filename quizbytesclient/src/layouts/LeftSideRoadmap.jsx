@@ -1,5 +1,5 @@
 import React from 'react';
-import RoadmapSectionTitle from '../components/RoadmapSectionTitle';
+import SectionTitle from '../components/SectionTitle';
 import { Box } from '@mui/material';
 import RoadmapPlayerStats from '../components/RoadmapPlayerStats';
 import RoadmapQuests from '../components/RoadmapQuests';
@@ -14,7 +14,7 @@ function LeftSideRoadmap() {
                 alignItems: 'center',
                 p: '0px 20px',
             }}>
-            <RoadmapSectionTitle text='Road so far' />
+            <SectionTitle text='Road so far' />
             <Box sx={{
                 mt: '20px',
                 // p: '10px',

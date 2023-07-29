@@ -204,46 +204,6 @@ export const themeSettings = (mode) => {
                     },
                 },
             },
-            // MuiIconButton: {
-            //   styleOverrides: {
-            //     root: {
-            //       // Add your custom styles for IconButton here
-            //       position: 'relative',
-            //       borderRadius: '50%',
-            //       border: '2px solid black',
-            //       width: 'fit-content',
-            //       mt: '10px',
-            //       display: 'flex',
-            //       alignItems: 'center',
-            //       justifyContent: 'center',
-            //       p: '0',
-            //       '&::before': {
-            //         content: "''",
-            //         position: 'absolute',
-            //         top: 0,
-            //         left: 0,
-            //         width: '50%',
-            //         height: '100%',
-            //         border: '2px solid black',
-            //         borderRightWidth: 0,
-            //         borderRadius: '50% 0 0 50%',
-            //         pointerEvents: 'none',
-            //       },
-            //       '&::after': {
-            //         content: "''",
-            //         position: 'absolute',
-            //         top: 0,
-            //         right: 0,
-            //         width: '50%',
-            //         height: '100%',
-            //         border: '2px solid black',
-            //         borderLeftWidth: 0,
-            //         borderRadius: '0 50% 50% 0',
-            //         pointerEvents: 'none',
-            //       },
-            //     },
-            //   },
-            // },
         },
 
     };

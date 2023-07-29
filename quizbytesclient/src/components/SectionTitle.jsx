@@ -1,7 +1,7 @@
 import { Divider, Typography } from '@mui/material'
 import React from 'react'
 
-function RoadmapSectionTitle({ text, fontColor }) {
+function SectionTitle({ text, fontColor }) {
     fontColor = fontColor ? fontColor : 'black.main';
 
     return (
@@ -19,4 +19,4 @@ function RoadmapSectionTitle({ text, fontColor }) {
     )
 }
 
-export default RoadmapSectionTitle
+export default SectionTitle;

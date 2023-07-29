@@ -34,7 +34,7 @@ function LogInForm({ setEmail, setPassword, onSubmit, onGoogleSignIn, status, se
         <Paper
             elevation={3}
             sx={{
-                maxHeight: '50vh',
+                maxHeight: '55vh',
                 height: 'auto',
                 width: '80vw',
                 minWidth: '276px',
@@ -146,7 +146,7 @@ function LogInForm({ setEmail, setPassword, onSubmit, onGoogleSignIn, status, se
                         backgroundColor: '#FAFBFB'
                     }
                 }}
-                className="login-with-google-btn" 
+                className="login-with-google-btn"
                 onClick={onGoogleSignIn} >
                 Continue with Google
             </Button>
