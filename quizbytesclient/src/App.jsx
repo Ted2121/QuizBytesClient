@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './styles/styles.css';
 import { ColorModeContext, useMode } from './theme';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
