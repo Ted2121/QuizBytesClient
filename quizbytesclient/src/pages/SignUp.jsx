@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SignUpForm from '../layouts/SignUpForm';
 import { Box } from '@mui/material';
 import { auth, googleProvider } from '../firebase';
-import { signInWithRedirect, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { signInWithPopup, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -53,18 +53,23 @@ function SignUp() {
 
   const handleGoogleLogin = async () => {
     try {
-      await signInWithRedirect(auth, googleProvider);
-
-      if (auth.currentUser) {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      if (user) {
+        // Get the user's ID token
+        const token = await user.getIdToken();
+  
+        // Set the user and token in the AuthContext
+        setAuth({ token: token, user: user });
         navigate(from, { replace: true });
       }
+      console.log(auth?.currentUser?.displayName);
     } catch (error) {
       console.error(error);
       setStatus('error');
     }
   }
 
-  console.log(auth?.currentUser?.displayName)
   return (
     <Box sx={{
       justifyContent: 'center',

@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import React, { useState } from 'react'
 import LogInForm from '../layouts/LogInForm';
 import { auth, googleProvider } from '../firebase';
-import { signInWithEmailAndPassword, signInWithRedirect } from 'firebase/auth';
+import { signInWithPopup } from "firebase/auth";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -42,17 +42,19 @@ function LogIn() {
     }
   }
 
-  // console.log(auth?.currentUser?.displayName);
-
   const handleGoogleLogin = async () => {
     try {
-      // console.log('i was clicked');
-      await signInWithRedirect(auth, googleProvider);
-
-      if (auth.currentUser) {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      if (user) {
+        // Get the user's ID token
+        const token = await user.getIdToken();
+  
+        // Set the user and token in the AuthContext
+        setAuth({ token: token, user: user });
         navigate(from, { replace: true });
       }
-      // console.log(auth?.currentUser?.displayName)
+      console.log(auth?.currentUser?.displayName);
     } catch (error) {
       console.error(error);
       setStatus('error');
