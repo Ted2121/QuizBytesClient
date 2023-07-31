@@ -56,10 +56,8 @@ function SignUp() {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
       if (user) {
-        // Get the user's ID token
         const token = await user.getIdToken();
-  
-        // Set the user and token in the AuthContext
+
         setAuth({ token: token, user: user });
         navigate(from, { replace: true });
       }

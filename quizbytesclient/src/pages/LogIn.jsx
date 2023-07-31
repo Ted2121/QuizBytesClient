@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import React, { useState } from 'react'
 import LogInForm from '../layouts/LogInForm';
 import { auth, googleProvider } from '../firebase';
-import { signInWithPopup } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -24,12 +24,9 @@ function LogIn() {
       const user = auth?.currentUser;
 
       if (user) {
-        // Get the user's ID token
         const token = await user.getIdToken();
 
-        // Set the user and token in the AuthContext
         setAuth({ token: token, user: user });
-
         navigate(from, { replace: true });
       }
     } catch (error) {
@@ -47,10 +44,8 @@ function LogIn() {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
       if (user) {
-        // Get the user's ID token
         const token = await user.getIdToken();
   
-        // Set the user and token in the AuthContext
         setAuth({ token: token, user: user });
         navigate(from, { replace: true });
       }
