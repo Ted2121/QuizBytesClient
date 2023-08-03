@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { useContext } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react'
 import { CourseContext } from '../context/CourseContext';
 import { Box, Grid, Typography } from '@mui/material';
 import BuiltRoadmap from '../layouts/BuiltRoadmap';
@@ -14,7 +13,6 @@ import RoadmapPlayerStats from '../components/RoadmapPlayerStats';
 import RoadmapQuests from '../components/RoadmapQuests';
 import RoadmapLeaderboard from '../components/RoadmapLeaderboard';
 import { getQuizAsync } from '../service/quizRequestsFacade';
-import Quiz from './Quiz';
 import useAuth from '../hooks/useAuth';
 
 function Roadmap() {
@@ -36,7 +34,7 @@ function Roadmap() {
 
   const isMobileDevice = useMediaQuery({ maxWidth: 899 });
 
-  const {auth} = useAuth();
+  const { auth } = useAuth();
 
   function handleStatsToggleClick() {
     setIsStatsOpen((prevState) => !prevState);
@@ -58,6 +56,7 @@ function Roadmap() {
     const fetchCourseProgression = async () => {
       try {
         const progression = await getCompletedChaptersInCourseAsync(course?.courseName);
+        console.log(progression);
         setCourseProgression(progression);
       } catch (error) {
         console.error(error);
@@ -65,7 +64,6 @@ function Roadmap() {
         setIsLoading(false);
       }
     };
-
     if (course) {
       fetchCourseProgression();
     }
@@ -75,7 +73,6 @@ function Roadmap() {
     }
   }, [course, from, navigate]);
 
-  // TODO if course is null or undefined, get it from local storage
 
   function handleSetOpenChapter(index) {
     setOpenChapter(course?.chaptersList[index]);
@@ -89,21 +86,41 @@ function Roadmap() {
     setDifficultyLevel(difficulty);
   }
 
-  async function handleStartQuizClick() {
-    // console.log(openChapter);
-    try {
-
-      const data = await getQuizAsync(openChapter?.title, difficultyLevel, 20, auth?.token);
-      
-      return (
-        <Quiz data={data} />
-      );
-    } catch (error) {
-      console.error(error);
-      navigate('/server-error');
+  async function handleStartQuizClick(fromRoadmap) {
+    if (!auth?.user) {
+      // If the user is not authenticated, navigate to the login page
+      navigate('/login');
+    } else {
+      // The user is authenticated, proceed to start the quiz
+      try {
+        const data = await getQuizAsync(
+          openChapter?.title,
+          difficultyLevel,
+          20,
+          auth?.token
+        );
+        // Show the Quiz component
+        // return <Quiz data={data} />;
+        navigate('/quiz', { state: { quizData: data, fromRoadmap } });
+      } catch (error) {
+        console.error(error);
+        navigate('/server-error');
+      }
     }
-
   }
+
+  const handleStartQuizClickCallback = useCallback(() => {
+    handleStartQuizClick(true); // Set to true since the request is from the Roadmap component
+  }, [auth, openChapter, difficultyLevel]);
+
+  useEffect(() => {
+    // Check if the user has successfully authenticated and the request was from Roadmap.
+    // If yes, navigate back to the Roadmap component.
+    if (location.state?.authenticated && location.state?.fromRoadmap) {
+      // Replace the '/login' path with the appropriate path to the Roadmap component
+      navigate('/roadmap', { replace: true });
+    }
+  }, [location.state, navigate]);
 
   if (isLoading) {
     return (
@@ -171,7 +188,7 @@ function Roadmap() {
         content={<RightSideRoadmap
           onDifficultyChange={handleDifficultyChange}
           selectedDifficulty={difficultyLevel}
-          onStartQuizClick={handleStartQuizClick}
+          onStartQuizClick={() => handleStartQuizClickCallback(true)}
           paddingTop='10px' cardElevation={0}
           fontColor='white.main'
           openChapter={openChapter} />} />

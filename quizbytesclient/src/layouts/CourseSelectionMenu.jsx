@@ -14,7 +14,7 @@ function CourseSelectionMenu() {
         const filteredCourses = courses.filter((course) => {
             const courseMatches = course.course.toLowerCase().includes(value.toLowerCase());
             const chapterMatches = course.chapters.some((chapter) =>
-                chapter.toLowerCase().includes(value.toLowerCase())
+                chapter.title.toLowerCase().includes(value.toLowerCase())
             );
 
             return courseMatches || chapterMatches;
